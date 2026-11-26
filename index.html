@@ -129,6 +129,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
 .where small { font-size: 13.5px; opacity: 0.85; }
 .where b { font-family: var(--font-cute); font-weight: 400; font-size: 20px; line-height: 1.2; }
 .hint { margin: 0; font-size: 12.5px; color: var(--ink-3); }
+.hint .whim { color: var(--home-ink); font-weight: 700; background: var(--home-bg); padding: 0 4px; border-radius: 4px; }
 
 .tl { display: grid; gap: 7px; }
 .tl-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 10px; }
@@ -543,7 +544,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
         <div class="where-row">
           <div class="where" id="hero-where-wrap" hidden><span class="ico" data-icon="pin"></span><small>지금 위치</small><b id="hero-where"></b></div>
         </div>
-        <p class="hint">일정을 보고 짐작한 위치예요 · 학교까지는 1시간쯤 걸려요</p>
+        <p class="hint">일정을 보고 짐작한 위치예요. 성현이의 <b class="whim">단순 변심</b>에 의한 위치 추적 불가는 짐작할 수 없어요</p>
       </div>
       <div class="tl" id="hero-tl" hidden>
         <div class="tl-row"><b id="hero-range"></b><span id="hero-left"></span></div>
@@ -600,7 +601,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
   </section>
 
   <section class="view" id="view-dl" aria-label="마감" hidden>
-    <p class="dl-intro"><span class="mascot" data-mascot="ta"></span><span>성현이 챙기고 있는 논문 일정이에요. 시간은 한국 시간이에요.</span></p>
+    <p class="dl-intro"><span class="mascot" data-mascot="ta"></span><span>논문 일정이랑 밖에 나가는 중요한 날이에요. 시간은 한국 시간이에요.</span></p>
     <div class="papers" id="papers"></div>
     <h3 class="sec-h"><span class="ico" data-icon="alarm"></span>다가오는 일정</h3>
     <ol class="dl-list" id="dl-up"></ol>
@@ -677,7 +678,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
   <button type="button" class="tb" id="tb-bot" aria-label="성현봇에게 물어보기"><span class="tb-face"><span class="mascot" data-mascot="bot"></span></span><span>성현봇</span><span class="tb-dot" id="tb-dot" hidden></span></button>
 </nav>
 
-<script type="application/json" id="schedule-data">{"updatedAt":"2026-11-25T12:01:00+09:00","rangeStart":"2026-11-23","rangeEnd":"2026-12-06","papers":[{"id":"A","desc":"편향을 줄이는 연구 · 두 번 떨어지고 다시 도전하는 논문"},{"id":"B","desc":"이번에 처음 낸 논문"}],"events":[{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-11-23T13:30:00+09:00","end":"2026-11-23T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-11-24T11:30:00+09:00","end":"2026-11-24T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-24T15:45:00+09:00","end":"2026-11-24T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-25T13:00:00+09:00","end":"2026-11-25T13:45:00+09:00"},{"title":"외부 연구 미팅","kind":"partner","place":"학교","start":"2026-11-25T14:00:00+09:00","end":"2026-11-25T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-26T10:30:00+09:00","end":"2026-11-26T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-11-26T17:00:00+09:00","end":"2026-11-26T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-11-27T09:00:00+09:00","end":"2026-11-27T11:00:00+09:00"},{"title":"연구실 학위논문 심사 참관","kind":"lab","place":"학교","start":"2026-11-30T16:00:00+09:00","end":"2026-11-30T18:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-01T11:30:00+09:00","end":"2026-12-01T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T15:45:00+09:00","end":"2026-12-01T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-02T11:15:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-02T13:00:00+09:00","end":"2026-12-02T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-03T10:30:00+09:00","end":"2026-12-03T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-03T17:00:00+09:00","end":"2026-12-03T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-04T09:00:00+09:00","end":"2026-12-04T11:00:00+09:00"}],"deadlines":[{"paper":"A","title":"보충자료 제출 마감","type":"deadline","start":"2026-11-24T20:00:00+09:00","end":"2026-11-24T20:59:00+09:00"},{"paper":"B","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2026-11-24T21:00:00+09:00","end":"2026-11-25T21:00:00+09:00"},{"paper":"B","title":"심사 답변 마감","type":"deadline","start":"2026-12-01T20:00:00+09:00","end":"2026-12-01T20:59:00+09:00"},{"paper":"B","title":"최종 심사평 공개","type":"milestone","start":"2026-12-17T21:00:00+09:00","end":"2026-12-19T21:00:00+09:00"},{"paper":"B","title":"학회 제출 확정 마감","type":"deadline","start":"2026-12-24T20:00:00+09:00","end":"2026-12-24T20:59:00+09:00"},{"paper":"A","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2027-01-25T21:00:00+09:00","end":"2027-01-26T21:00:00+09:00"},{"paper":"A","title":"심사 답변 마감","type":"deadline","start":"2027-02-02T20:00:00+09:00","end":"2027-02-02T20:59:00+09:00"},{"paper":"B","title":"합격 발표","type":"milestone","start":"2027-02-10T21:00:00+09:00","end":"2027-02-11T21:00:00+09:00"},{"paper":"A","title":"최종 결과 발표","type":"milestone","start":"2027-02-25T21:00:00+09:00","end":"2027-02-26T21:00:00+09:00"},{"paper":"B","title":"최종본 제출 마감 (합격 시)","type":"deadline","start":"2027-03-04T20:00:00+09:00","end":"2027-03-04T20:59:00+09:00"}]}</script>
+<script type="application/json" id="schedule-data">{"updatedAt":"2026-11-26T16:34:00+09:00","rangeStart":"2026-11-23","rangeEnd":"2026-12-06","papers":[{"id":"A","desc":"편향을 줄이는 연구 · 두 번 떨어지고 다시 도전하는 논문"},{"id":"B","desc":"이번에 처음 낸 논문"}],"events":[{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-11-23T13:30:00+09:00","end":"2026-11-23T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-11-24T11:30:00+09:00","end":"2026-11-24T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-24T15:45:00+09:00","end":"2026-11-24T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-25T13:00:00+09:00","end":"2026-11-25T13:45:00+09:00"},{"title":"외부 연구 미팅","kind":"partner","place":"학교","start":"2026-11-25T14:00:00+09:00","end":"2026-11-25T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-26T10:30:00+09:00","end":"2026-11-26T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-11-26T17:00:00+09:00","end":"2026-11-26T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-11-27T09:00:00+09:00","end":"2026-11-27T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-27T13:00:00+09:00","end":"2026-11-27T13:45:00+09:00"},{"title":"삼성 직원 대상 온라인 강연","kind":"partner","place":"","allDay":true,"date":"2026-11-30","endDate":"2026-12-01"},{"title":"연구실 학위논문 심사 참관","kind":"lab","place":"학교","start":"2026-11-30T16:00:00+09:00","end":"2026-11-30T18:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-01T11:30:00+09:00","end":"2026-12-01T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T15:45:00+09:00","end":"2026-12-01T16:30:00+09:00"},{"title":"외부 연구 미팅","kind":"partner","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-02T11:15:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-03T10:30:00+09:00","end":"2026-12-03T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-03T17:00:00+09:00","end":"2026-12-03T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-04T09:00:00+09:00","end":"2026-12-04T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-04T13:00:00+09:00","end":"2026-12-04T13:45:00+09:00"},{"title":"개인 일정","kind":"personal","place":"","start":"2026-12-04T17:00:00+09:00","end":"2026-12-05T11:00:00+09:00"}],"deadlines":[{"paper":"A","title":"보충자료 제출 마감","type":"deadline","start":"2026-11-24T20:00:00+09:00","end":"2026-11-24T20:59:00+09:00"},{"paper":"B","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2026-11-24T21:00:00+09:00","end":"2026-11-25T21:00:00+09:00"},{"paper":"A","title":"보충자료 제출 마감 (연장)","type":"deadline","start":"2026-11-28T20:00:00+09:00","end":"2026-11-28T20:59:00+09:00"},{"paper":"","title":"삼성 직원 대상 온라인 강연","type":"event","place":"학교","start":"2026-11-30T00:00:00+09:00","end":"2026-12-01T00:00:00+09:00"},{"paper":"B","title":"심사 답변 마감","type":"deadline","start":"2026-12-01T20:00:00+09:00","end":"2026-12-01T20:59:00+09:00"},{"paper":"","title":"외부 방문 미팅","type":"event","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"paper":"B","title":"최종 심사평 공개","type":"milestone","start":"2026-12-17T21:00:00+09:00","end":"2026-12-19T21:00:00+09:00"},{"paper":"B","title":"학회 제출 확정 마감","type":"deadline","start":"2026-12-24T20:00:00+09:00","end":"2026-12-24T20:59:00+09:00"},{"paper":"A","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2027-01-25T21:00:00+09:00","end":"2027-01-26T21:00:00+09:00"},{"paper":"A","title":"심사 답변 마감","type":"deadline","start":"2027-02-02T20:00:00+09:00","end":"2027-02-02T20:59:00+09:00"},{"paper":"B","title":"합격 발표","type":"milestone","start":"2027-02-10T21:00:00+09:00","end":"2027-02-11T21:00:00+09:00"},{"paper":"A","title":"최종 결과 발표","type":"milestone","start":"2027-02-25T21:00:00+09:00","end":"2027-02-26T21:00:00+09:00"},{"paper":"B","title":"최종본 제출 마감 (합격 시)","type":"deadline","start":"2027-03-04T20:00:00+09:00","end":"2027-03-04T20:59:00+09:00"}]}</script>
 <script type="application/json" id="page-custom">{}</script>
 <script>
 /*LOGIC-START*/
@@ -692,7 +693,9 @@ function dayStart(ms) { return Math.floor((ms + OFF) / DAY) * DAY - OFF; }
 function weekStart(ms) { const d0 = dayStart(ms); return d0 - ((parts(d0).wd + 6) % 7) * DAY; }
 function parseDay(str) { return Date.parse(String(str) + "T00:00:00+09:00"); }
 function isBusy(ev) { return !ev.allDay && ev.kind !== "holiday"; }
-function isSchoolEv(ev) { return ev.place ? ev.place === "학교" : !!SCHOOL[ev.kind]; }
+function isSchoolEv(ev) { return ev.place ? ev.place !== "집" : !!SCHOOL[ev.kind]; }
+function outPlace(ev) { return ev.place && ev.place !== "집" ? ev.place : "학교"; }
+function ro(w) { const c = w.charCodeAt(w.length - 1) - 0xAC00; return w + (c >= 0 && c < 11172 && c % 28 !== 0 && c % 28 !== 8 ? "으로" : "로"); }
 function normalize(raw) {
   return (Array.isArray(raw) ? raw : []).map((ev, i) => {
     const allDay = !!ev.allDay;
@@ -705,10 +708,10 @@ function normalize(raw) {
 }
 function normalizeDeadlines(raw) {
   return (Array.isArray(raw) ? raw : []).map(d => {
-    const type = d.type === "milestone" ? "milestone" : "deadline";
+    const type = d.type === "milestone" || d.type === "event" ? d.type : "deadline";
     const s = Date.parse(d.start), e0 = Date.parse(d.end);
     const e = Number.isFinite(e0) && e0 >= s ? e0 : s;
-    return { paper: d.paper ? String(d.paper) : "", title: String(d.title || "마감"), type, s, e, key: type === "deadline" ? e : s };
+    return { paper: d.paper ? String(d.paper) : "", title: String(d.title || "마감"), type, s, e, key: type === "deadline" ? e : s, place: d.place ? String(d.place) : "" };
   }).filter(d => Number.isFinite(d.s)).sort((a, b) => a.key - b.key);
 }
 function clock(ms) { const p = parts(ms); return { ap: p.h < 12 ? "오전" : "오후", hm: (p.h % 12 || 12) + ":" + pad(p.mi), midnight: p.h === 0 && p.mi === 0 }; }
@@ -748,7 +751,7 @@ function dayPlan(events, d0) {
   if (!list.length) return null;
   const first = Math.min(...list.map(ev => Math.max(ev.s, d0)));
   const last = Math.max(...list.map(ev => Math.min(ev.e, d1)));
-  return { depart: Math.max(d0, first - 2 * H), arrive: Math.max(d0, first - H), leave: last, home: Math.min(d1, last + H), count: list.length };
+  return { depart: Math.max(d0, first - 2 * H), arrive: Math.max(d0, first - H), leave: last, home: Math.min(d1, last + H), count: list.length, where: outPlace(list[0]) };
 }
 function nowState(events, now, rangeEnd) {
   const busy = events.filter(isBusy);
@@ -767,29 +770,33 @@ function nowState(events, now, rangeEnd) {
   if (now >= rangeEnd) return { mode: "stale", tone: "due", mascot: "stale", big: "일정을 새로 불러오는 중이에요", sub: "곧 업데이트돼요", where: "", next: null };
   const night = hour >= 22 || hour < 6;
   if (plan && now < plan.depart) {
-    return { mode: "morning", tone: night ? "night" : "morning", mascot: night ? "night" : "morning", big: "아직 집이에요", sub: fmtTime(plan.depart) + "쯤 학교로 출발해요", where: "집", next };
+    return { mode: "morning", tone: night ? "night" : "morning", mascot: night ? "night" : "morning", big: "아직 집이에요", sub: fmtTime(plan.depart) + "쯤 " + ro(plan.where) + " 출발해요", where: "집", next };
   }
   if (plan && now < plan.arrive) {
-    return { mode: "toSchool", tone: "commute", mascot: "toSchool", big: "학교 가는 중이에요", sub: fmtTime(plan.arrive) + "쯤 도착해요", where: "학교 가는 길",
-      range: "학교 가는 길 " + fmtRange(plan.depart, plan.arrive), left: fmtDur(plan.arrive - now) + " 뒤 도착", progress: clamp01((now - plan.depart) / (plan.arrive - plan.depart)), next };
+    return { mode: "toSchool", tone: "commute", mascot: "toSchool", big: plan.where + " 가는 중이에요", sub: fmtTime(plan.arrive) + "쯤 도착해요", where: plan.where + " 가는 길",
+      range: plan.where + " 가는 길 " + fmtRange(plan.depart, plan.arrive), left: fmtDur(plan.arrive - now) + " 뒤 도착", progress: clamp01((now - plan.depart) / (plan.arrive - plan.depart)), next };
   }
   if (plan && now < plan.leave) {
     const nextSchool = busy.find(ev => isSchoolEv(ev) && ev.s > now && ev.s < t1);
-    return { mode: "school", tone: "school", mascot: "school", big: "학교에서 연구하는 중이에요",
+    return { mode: "school", tone: "school", mascot: "school", big: plan.where === "학교" ? "학교에서 연구하는 중이에요" : plan.where + "에 있어요",
       sub: nextSchool ? "미팅 없는 시간 · 다음 일정까지 " + fmtDur(nextSchool.s - now) : "미팅 없는 시간",
-      where: "학교", range: "학교 " + fmtRange(plan.arrive, plan.leave), left: fmtDur(plan.leave - now) + " 뒤 집으로",
+      where: plan.where, range: plan.where + " " + fmtRange(plan.arrive, plan.leave), left: fmtDur(plan.leave - now) + " 뒤 집으로",
       progress: clamp01((now - plan.arrive) / (plan.leave - plan.arrive)), next };
   }
   if (plan && now < plan.home) {
-    return { mode: "commute", tone: "commute", mascot: "commute", big: "집에 가는 중이에요", sub: "학교 일정이 " + fmtTime(plan.leave) + "에 끝났어요", where: "집 가는 길",
+    return { mode: "commute", tone: "commute", mascot: "commute", big: "집에 가는 중이에요", sub: plan.where + " 일정이 " + fmtTime(plan.leave) + "에 끝났어요", where: "집 가는 길",
       range: "집 가는 길 " + fmtRange(plan.leave, plan.home), left: fmtDur(plan.home - now) + " 뒤 도착", progress: clamp01((now - plan.leave) / (plan.home - plan.leave)), next };
   }
   return { mode: "home", tone: night ? "night" : "home", mascot: night ? "night" : "home", big: "집에서 쉬는 중이에요",
-    sub: plan ? "오늘 학교 일정 끝!" : "오늘은 학교 가는 날이 아니에요", where: "집", next };
+    sub: plan ? "오늘 " + plan.where + " 일정 끝!" : "오늘은 학교 가는 날이 아니에요", where: "집", next };
 }
 function dday(key, now) { const diff = Math.round((dayStart(key) - dayStart(now)) / DAY); return diff > 0 ? "D-" + diff : diff === 0 ? "D-DAY" : "D+" + (-diff); }
-function dlLabel(d) { return (d.paper ? "논문 " + d.paper + " · " : "") + d.title; }
+function dlLabel(d) { return (d.paper ? "논문 " + d.paper + " · " : "") + d.title + (d.place ? " · " + d.place : ""); }
+function dlKind(d) { return d.type === "deadline" ? "due" : d.type === "event" ? "partner" : "mile"; }
+function dlIconName(d) { return d.type === "deadline" ? "alarm" : d.type === "event" ? "pin" : "letter"; }
+function dlFullDay(d) { const p = parts(d.s); return d.type === "event" && d.e > d.s && p.h === 0 && p.mi === 0 && (d.e - d.s) % DAY === 0; }
 function dlWhen(d) {
+  if (d.type === "event") return dlFullDay(d) ? fmtDate(d.s) + (d.e - d.s > DAY ? " ~ " + fmtDate(d.e - DAY) : "") : d.e > d.s ? (dayStart(d.s) === dayStart(d.e - 1) ? fmtDate(d.s) + " " : "") + fmtRange(d.s, d.e) : fmtDate(d.s) + " " + fmtTime(d.s);
   if (d.type === "deadline") return fmtDate(d.e) + " " + fmtTime(d.e) + "까지";
   const a = parts(d.s), b = parts(d.e - 1);
   if (dayStart(d.s) === dayStart(d.e - 1)) return fmtDate(d.s) + " 중";
@@ -798,13 +805,15 @@ function dlWhen(d) {
 function dlState(d, now) {
   if (now >= d.e && (d.type === "deadline" || d.e > d.s)) return { past: true, text: "" };
   if (d.type === "deadline") { const left = d.e - now; return { past: false, text: left < 2 * DAY ? fmtDur(left) + " 남았어요" : "" }; }
-  if (now >= d.s) return { past: false, live: true, text: "지금 진행 중이에요" };
+  if (now >= d.s) return { past: false, live: true, text: dlFullDay(d) ? "오늘이에요" : "지금 진행 중이에요" };
+  if (d.type === "event") { const left = d.s - now; return { past: false, text: left < 2 * DAY && !dlFullDay(d) ? fmtDur(left) + " 뒤예요" : "" }; }
   return { past: false, text: "" };
 }
 function dlOnDay(dls, d0) { const d1 = d0 + DAY; return dls.filter(d => d.type === "deadline" ? d.e > d0 && d.e <= d1 : d.s < d1 && d.e > d0); }
 function dlChipText(d, d0) {
   const d1 = d0 + DAY;
   if (d.type === "deadline") return dlLabel(d) + " · " + fmtTime(d.e);
+  if (dlFullDay(d)) return dlLabel(d);
   if (d.s >= d0 && d.e <= d1) return dlLabel(d) + " · " + fmtRange(d.s, d.e);
   if (d.s >= d0) return dlLabel(d) + " · " + fmtTime(d.s) + "부터";
   if (d.e <= d1) return dlLabel(d) + " · " + fmtTime(d.e) + "까지";
@@ -815,6 +824,7 @@ function heroAlerts(dls, now) {
   dls.forEach(d => {
     if (d.type === "deadline" && d.e > now && d.e - now <= 7 * DAY) out.push({ kind: "due", icon: "alarm", text: dday(d.e, now) + " · " + dlLabel(d) });
     else if (d.type === "milestone" && d.s <= now && now < d.e) out.push({ kind: "mile", icon: "letter", text: "지금 · " + dlLabel(d) });
+    else if (d.type === "event" && d.e > now && d.s - now <= 7 * DAY) out.push({ kind: "partner", icon: "pin", text: (d.s <= now ? (dlFullDay(d) ? "오늘" : "지금") : dday(d.s, now)) + " · " + dlLabel(d) });
   });
   return out;
 }
@@ -824,12 +834,12 @@ function dayModel(events, d0, now, rangeEnd) {
   const plan = dayPlan(events, d0);
   const rows = [];
   const rank = { move: 0, gap: 1, event: 2 };
-  if (plan && plan.depart > d0) rows.push({ type: "move", t: plan.depart, t2: plan.depart, tone: "commute", mascot: "toSchool", title: "학교로 출발", sub: "학교까지 1시간쯤 걸려요" });
-  if (plan && plan.arrive > d0) rows.push({ type: "move", t: plan.arrive, t2: plan.arrive, tone: "school", mascot: "school", title: "학교 도착", sub: "첫 일정 1시간 전쯤" });
+  if (plan && plan.depart > d0) rows.push({ type: "move", t: plan.depart, t2: plan.depart, tone: "commute", mascot: "toSchool", title: ro(plan.where) + " 출발", sub: plan.where + "까지 1시간쯤 걸려요" });
+  if (plan && plan.arrive > d0) rows.push({ type: "move", t: plan.arrive, t2: plan.arrive, tone: "school", mascot: "school", title: plan.where + " 도착", sub: "첫 일정 1시간 전쯤" });
   let prevSchoolEnd = null;
   for (const ev of list) {
     const school = isSchoolEv(ev);
-    if (school && prevSchoolEnd !== null && ev.s - prevSchoolEnd >= 15 * MIN) rows.push({ type: "gap", t: prevSchoolEnd, t2: ev.s, tone: "school", text: "학교에서 연구하는 시간 · " + fmtDur(ev.s - prevSchoolEnd) });
+    if (school && prevSchoolEnd !== null && ev.s - prevSchoolEnd >= 15 * MIN) rows.push({ type: "gap", t: prevSchoolEnd, t2: ev.s, tone: "school", text: (plan && plan.where !== "학교" ? plan.where + "에 있는 시간 · " : "학교에서 연구하는 시간 · ") + fmtDur(ev.s - prevSchoolEnd) });
     const s = Math.max(ev.s, d0), e = Math.min(ev.e, d1), cs = clock(s), ce = clock(e);
     rows.push({ type: "event", t: ev.s, t2: ev.e, kind: ev.kind, mascot: mascotFor(ev), title: ev.title, place: ev.place || (school ? "학교" : ""), tag: KIND[ev.kind],
       startAp: cs.ap, startHm: cs.hm, endText: "~ " + (ce.midnight ? "자정" : (ce.ap === cs.ap ? ce.hm : ce.ap + " " + ce.hm)) });
@@ -1105,8 +1115,8 @@ function botFreeDay(events, dls, d0, win, now) {
   let text;
   if (tone === "no") {
     const cover = blocks.find(b => b.s <= ws && b.e >= we);
-    text = cover ? (cover.school ? "학교에 있는 시간이에요" : cover.title + " 일정이 있어요")
-      : plan && plan.home > ws ? "학교 일정이 " + fmtTime(plan.leave) + "에 끝나서 빠듯해요" : "일정이 꽉 차 있어요";
+    text = cover ? (cover.school ? plan.where + "에 있는 시간이에요" : cover.title + " 일정이 있어요")
+      : plan && plan.home > ws ? plan.where + " 일정이 " + fmtTime(plan.leave) + "에 끝나서 빠듯해요" : "일정이 꽉 차 있어요";
   } else if (full) {
     text = win.word ? win.word + " 내내 비어 있어요" : "하루 종일 비어 있어요";
   } else {
@@ -1170,7 +1180,7 @@ function botEnd(events, d0, now) {
     const rows = [{ k: "home", pill: "집 도착", text: fmtTime(plan.home) + "쯤" + (plan.home <= now ? " (도착했어요)" : "") },
       { k: last.kind, pill: "마지막", text: last.title + " · " + fmtRange(last.s, last.e) }];
     evs.filter(ev => !isSchoolEv(ev) && ev.s >= plan.leave).forEach(ev => rows.push({ k: ev.kind, pill: "그 뒤", text: fmtRange(ev.s, ev.e) + " " + ev.title }));
-    return { lead: name + " 학교 일정은 " + fmtTime(plan.leave) + "에 " + (plan.leave <= now ? "끝났어요" : "끝나요"), rows };
+    return { lead: name + " " + plan.where + " 일정은 " + fmtTime(plan.leave) + "에 " + (plan.leave <= now ? "끝났어요" : "끝나요"), rows };
   }
   if (evs.length) {
     const end = Math.max(...evs.map(ev => ev.e));
@@ -1187,7 +1197,7 @@ function botStart(events, d0, now, explicit, rangeEnd) {
   if (!plan) return { lead: name + " 학교 안 가는 날이에요", rows: [{ k: "home", pill: "집", text: "집에 있어요" }] };
   const first = botDayEvents(events, d0).filter(isSchoolEv)[0];
   return { lead: name + " " + fmtTime(plan.depart) + "쯤 집에서 나가요",
-    rows: [{ k: "commute", pill: "학교 도착", text: fmtTime(plan.arrive) + "쯤" }, { k: first.kind, pill: "첫 일정", text: fmtTime(first.s) + " " + first.title }] };
+    rows: [{ k: "commute", pill: plan.where + " 도착", text: fmtTime(plan.arrive) + "쯤" }, { k: first.kind, pill: "첫 일정", text: fmtTime(first.s) + " " + first.title }] };
 }
 function botSchool(events, sc, now, rangeEnd) {
   const t0 = dayStart(now);
@@ -1195,13 +1205,13 @@ function botSchool(events, sc, now, rangeEnd) {
   if (!days.length) { for (let d = t0; d < rangeEnd; d += DAY) days.push(d); label = "앞으로"; }
   const row = d0 => {
     const p = dayPlan(events, d0), evs = botDayEvents(events, d0);
-    return p ? { k: "school", pill: "학교", label: botShort(d0), text: fmtRange(p.arrive, p.leave) }
+    return p ? { k: "school", pill: p.where, label: botShort(d0), text: fmtRange(p.arrive, p.leave) }
       : { k: "home", pill: "집", label: botShort(d0), text: evs.length ? "집에서 " + evs.map(ev => ev.title).join(" · ") : "쉬는 날" };
   };
   if (days.length === 1) {
     const r = row(days[0]);
     delete r.label;
-    return { lead: botDayName(days[0], now) + (r.pill === "학교" ? " 학교 가요!" : " 학교 안 가요"), rows: [r] };
+    return { lead: botDayName(days[0], now) + (r.k === "school" ? " " + r.pill + " 가요!" : " 학교 안 가요"), rows: [r] };
   }
   const go = days.filter(d => dayPlan(events, d));
   return { lead: (label ? label + " " : "") + "학교 가는 날이에요", rows: days.map(row),
@@ -1216,15 +1226,15 @@ function botSummary(events, dls, sc, now, busyAsk) {
   const days = sc.inRange.length ? sc.inRange : [dayStart(now)];
   if (days.length === 1) {
     const d0 = days[0], d1 = d0 + DAY, plan = dayPlan(events, d0), evs = botDayEvents(events, d0);
-    const rows = [plan ? { k: "school", pill: "학교", text: fmtRange(plan.arrive, plan.leave) + " · 그 밖엔 집" }
+    const rows = [plan ? { k: "school", pill: plan.where, text: fmtRange(plan.arrive, plan.leave) + " · 그 밖엔 집" }
       : { k: "home", pill: "집", text: evs.length ? "학교 안 가는 날이에요" : "일정 없이 집에서 쉬어요" }];
     evs.forEach(ev => rows.push({ k: ev.kind, pill: KIND[ev.kind], text: fmtRange(Math.max(ev.s, d0), Math.min(ev.e, d1)) + " " + ev.title + (ev.place === "집" ? " (집에서)" : "") }));
-    dlOnDay(dls, d0).forEach(d => rows.push({ k: d.type === "deadline" ? "due" : "mile", pill: d.type === "deadline" ? "마감" : "논문", text: dlChipText(d, d0) }));
+    dlOnDay(dls, d0).forEach(d => rows.push({ k: dlKind(d), pill: d.type === "deadline" ? "마감" : d.type === "event" ? "중요" : "논문", text: dlChipText(d, d0) }));
     return { lead: botDayName(d0, now) + " 일정이에요", rows, foot: busyAsk ? botBusyWord(events, d0) : "" };
   }
   return { lead: (sc.label ? sc.label + " " : "") + "일정이에요", rows: days.map(d0 => {
     const plan = dayPlan(events, d0), evs = botDayEvents(events, d0), due = dlOnDay(dls, d0).some(d => d.type === "deadline");
-    return { k: plan ? "school" : "home", pill: plan ? "학교" : "집", label: botShort(d0),
+    return { k: plan ? "school" : "home", pill: plan ? plan.where : "집", label: botShort(d0),
       text: (evs.length ? evs.map(ev => ev.title).join(" · ") : "일정 없어요") + (due ? " · 논문 마감!" : "") + (busyAsk ? " — " + botBusyWord(events, d0) : "") };
   }) };
 }
@@ -1235,9 +1245,9 @@ function botDeadlines(dls, now, sc) {
   const nextDue = sc.inRange.length && !list.some(d => d.type === "deadline") ? dls.find(d => d.type === "deadline" && !dlState(d, now).past) : null;
   const foot = nextDue ? "다음 마감은 " + dlLabel(nextDue) + " · " + fmtDate(nextDue.e) + " (" + dday(nextDue.e, now) + ")" : "";
   if (!list.length) return { lead: sc.inRange.length ? "그때는 논문 마감이 없어요" : "다가오는 마감이 없어요", foot, chips: ["마감 탭 보기"] };
-  return { lead: sc.inRange.length && !list.some(d => d.type === "deadline") ? "그때 마감은 없고, 이런 일정이 있어요" : "다가오는 논문 일정이에요", rows: list.map(d => {
+  return { lead: sc.inRange.length && !list.some(d => d.type === "deadline") ? "그때 마감은 없고, 이런 일정이 있어요" : "다가오는 중요한 일정이에요", rows: list.map(d => {
     const st = dlState(d, now);
-    return { k: d.type === "deadline" ? "due" : "mile", pill: st.live ? "진행 중" : dday(d.key, now), text: dlLabel(d) + " · " + dlWhen(d) };
+    return { k: dlKind(d), pill: st.live ? (dlFullDay(d) ? "오늘" : "진행 중") : dday(d.key, now), text: dlLabel(d) + " · " + dlWhen(d) };
   }), foot, chips: ["마감 탭 보기"] };
 }
 function botOutOfRange(rangeStart, rangeEnd) {
@@ -1250,7 +1260,7 @@ const BOT_HELP = { lead: "이런 건 바로 알려줄 수 있어요", rows: [
   { k: "info", pill: "언제", text: "오늘 몇 시에 끝나는지, 몇 시에 나가는지" },
   { k: "info", pill: "약속", text: "저녁·주말에 시간 되는 날" },
   { k: "info", pill: "일정", text: "오늘·내일·요일별 일정, 학교 가는 날" },
-  { k: "info", pill: "마감", text: "논문 마감이랑 결과 나오는 날" }],
+  { k: "info", pill: "마감", text: "논문 마감·결과, 밖에 나가는 중요한 날" }],
   foot: "그 밖의 질문은 성현이한테 전해 줄게요", chips: ["지금 뭐 해?", "다음 주 저녁 언제 돼?", "내일 일정 알려줘"] };
 const BOT_HELLO = { lead: "안녕하세요! 성현이 일정 궁금한 거 있으면 물어봐요", chips: ["지금 뭐 해?", "다음 주 저녁 언제 돼?"] };
 const BOT_THANKS = { lead: "천만에요! 또 궁금하면 불러 주세요" };
@@ -1451,14 +1461,14 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
       nx.replaceChildren(...kids);
     }
     const m = stripModel(EVENTS, now);
-    $("strip-sum").textContent = m.plan ? "학교 " + fmtRange(m.plan.arrive, m.plan.leave) + " · 그 밖엔 집" : "오늘은 집에 있는 날이에요";
+    $("strip-sum").textContent = m.plan ? m.plan.where + " " + fmtRange(m.plan.arrive, m.plan.leave) + " · 그 밖엔 집" : "오늘은 집에 있는 날이에요";
     const parts2 = [];
     m.bands.forEach(bd => { const d = el("span", "strip-band k-" + bd.tone); d.style.left = bd.left + "%"; d.style.width = bd.width + "%"; parts2.push(d); });
     m.segs.forEach(sg => { const d = el("span", "strip-seg k-" + sg.kind + (sg.past ? " is-past" : "")); d.style.left = sg.left + "%"; d.style.width = sg.width + "%"; d.title = sg.title; parts2.push(d); });
     if (m.nowPct >= 0 && m.nowPct <= 100) { const n = el("span", "strip-now" + (m.nowPct < 10 ? " edge-l" : m.nowPct > 90 ? " edge-r" : "")); n.style.left = m.nowPct + "%"; n.append(el("span", "", "지금")); parts2.push(n); }
     $("strip-bar").replaceChildren(...parts2);
     $("strip-ticks").replaceChildren(...m.ticks.map(t => { const s = el("span", "", t.h + "시"); s.style.left = t.pct + "%"; return s; }));
-    const soon = DLS.filter(d => d.type === "deadline" && d.e > now && d.e - now <= 7 * DAY).length;
+    const soon = DLS.filter(d => d.type !== "milestone" && d.key > now && d.key - now <= 7 * DAY).length;
     $("tab-dl-badge").hidden = soon === 0;
     $("tab-dl-badge").textContent = String(soon);
     $("tb-dl-badge").hidden = soon === 0;
@@ -1473,7 +1483,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     $("day-prev").disabled = state.day <= rangeStart;
     $("day-next").disabled = state.day >= rangeEnd - DAY;
     $("day-today").hidden = state.day === today0 || today0 < rangeStart || today0 >= rangeEnd;
-    $("day-dl").replaceChildren(...dlOnDay(DLS, state.day).map(d => { const c = el("span", "chip " + (d.type === "deadline" ? "k-due" : "k-mile")); c.append(icon(d.type === "deadline" ? "alarm" : "letter"), el("span", "", dlChipText(d, state.day))); return c; }));
+    $("day-dl").replaceChildren(...dlOnDay(DLS, state.day).map(d => { const c = el("span", "chip k-" + dlKind(d)); c.append(icon(dlIconName(d)), el("span", "", dlChipText(d, state.day))); return c; }));
     const m = dayModel(EVENTS, state.day, now, rangeEnd);
     const list = $("day-list");
     if (m.empty) { const li = el("li", "empty"); li.append(mascot("home"), el("span", "", "학교 일정이 없는 날이에요. 집에서 쉬어요")); list.replaceChildren(li); return; }
@@ -1539,7 +1549,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     cells.push(el("div", "wk-dl-label", "마감"));
     days.forEach(d => {
       const box = el("div", "wk-dl");
-      d.dls.forEach(x => { const n = el("div", x.type === "deadline" ? "k-due" : "k-mile"); n.append(el("span", "", dlLabel(x)), el("small", "", x.type === "deadline" ? fmtTime(x.e) : (x.s >= d.d0 ? fmtTime(x.s) + "부터" : fmtTime(Math.min(x.e, d.d1)) + "까지"))); box.append(n); });
+      d.dls.forEach(x => { const n = el("div", "k-" + dlKind(x)); n.append(el("span", "", dlLabel(x)), el("small", "", x.type === "deadline" ? fmtTime(x.e) : dlFullDay(x) ? "종일" : (x.s >= d.d0 ? fmtTime(x.s) + "부터" : fmtTime(Math.min(x.e, d.d1)) + "까지"))); box.append(n); });
       cells.push(box);
     });
     const times = el("div", "wk-times"); times.style.height = bodyH + "px";
@@ -1548,7 +1558,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     days.forEach(d => {
       const col = el("div", "wk-col" + (d.d0 === today0 ? " is-today" : ""));
       col.style.height = bodyH + "px";
-      if (d.plan) { const band = el("div", "wk-school"); band.style.top = yOf(d.plan.arrive, d.d0) + "px"; band.style.height = Math.max(8, yOf(d.plan.leave, d.d0) - yOf(d.plan.arrive, d.d0)) + "px"; band.title = "학교에 있는 시간 · " + fmtRange(d.plan.arrive, d.plan.leave); col.append(band); }
+      if (d.plan) { const band = el("div", "wk-school"); band.style.top = yOf(d.plan.arrive, d.d0) + "px"; band.style.height = Math.max(8, yOf(d.plan.leave, d.d0) - yOf(d.plan.arrive, d.d0)) + "px"; band.title = d.plan.where + "에 있는 시간 · " + fmtRange(d.plan.arrive, d.plan.leave); col.append(band); }
       lanes(d.busy).forEach(({ ev, lane, lanes: n }) => {
         const s = Math.max(ev.s, d.d0), e = Math.min(ev.e, d.d1);
         const top = yOf(s, d.d0), height = Math.max(24, (e - s) / H * pxh - 3);
@@ -1571,8 +1581,8 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
       head.append(mascot(d.plan ? "school" : "home"), el("span", "", p.mo + "월 " + p.d + "일"), el("span", "wd" + wdCls(d.wd), WD[d.wd] + "요일"));
       if (d.d0 === today0) head.append(el("span", "badge", "오늘"));
       card.append(head);
-      card.append(el("span", "wl-plan " + (d.plan ? "k-school" : "k-home"), d.plan ? "학교 " + fmtRange(d.plan.arrive, d.plan.leave) + " · 그 밖엔 집" : (d.busy.length ? "학교 안 가는 날 · 집에 있어요" : "학교 안 가는 날 · 집에서 쉬어요")));
-      if (d.dls.length) { const c = el("div", "chips"); d.dls.forEach(x => { const ch = el("span", "chip " + (x.type === "deadline" ? "k-due" : "k-mile")); ch.append(icon(x.type === "deadline" ? "alarm" : "letter"), el("span", "", dlChipText(x, d.d0))); c.append(ch); }); card.append(c); }
+      card.append(el("span", "wl-plan " + (d.plan ? "k-school" : "k-home"), d.plan ? d.plan.where + " " + fmtRange(d.plan.arrive, d.plan.leave) + " · 그 밖엔 집" : (d.busy.length ? "학교 안 가는 날 · 집에 있어요" : "학교 안 가는 날 · 집에서 쉬어요")));
+      if (d.dls.length) { const c = el("div", "chips"); d.dls.forEach(x => { const ch = el("span", "chip k-" + dlKind(x)); ch.append(icon(dlIconName(x)), el("span", "", dlChipText(x, d.d0))); c.append(ch); }); card.append(c); }
       if (d.busy.length) {
         const ul = el("ul", "wl-items");
         d.busy.forEach(ev => {
@@ -1593,16 +1603,16 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     const past = DLS.filter(d => dlState(d, now).past).reverse();
     const nextDue = up.find(d => d.type === "deadline");
     const item = (d, isPast) => {
-      const st = dlState(d, now), k = d.type === "deadline" ? "k-due" : "k-mile";
+      const st = dlState(d, now), k = "k-" + dlKind(d);
       const li = el("li", "dl-item " + k + (isPast ? " is-past" : "") + (d === nextDue ? " is-next" : ""));
       if (d === nextDue) li.append(el("span", "ribbon", "가장 가까운 마감"));
       const p = parts(d.key);
       const cal = el("div", "dl-cal"); cal.append(el("span", "mo", p.mo + "월"), el("span", "dd", String(p.d)), el("span", "wd", WD[p.wd] + "요일"));
       const main = el("div", "dl-main");
       const t = el("p", "dl-title"); if (d.paper) t.append(el("span", "dl-paper " + paperClass(d.paper), "논문 " + d.paper)); t.append(el("span", "", d.title));
-      main.append(t, el("p", "dl-when", dlWhen(d)));
+      const wn = el("p", "dl-when", dlWhen(d)); if (d.place) wn.append(" ", placeEl(d.place)); main.append(t, wn);
       if (!isPast && st.text) main.append(el("p", "dl-left", st.text));
-      li.append(cal, main, el("span", "dday", isPast ? "지났어요" : st.live ? "진행 중" : dday(d.key, now)));
+      li.append(cal, main, el("span", "dday", isPast ? "지났어요" : st.live ? (dlFullDay(d) ? "오늘" : "진행 중") : dday(d.key, now)));
       return li;
     };
     if (up.length) $("dl-up").replaceChildren(...up.map(d => item(d, false)));
