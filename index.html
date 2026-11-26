@@ -518,6 +518,18 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
   .bot-head { padding-top: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .tb .ico { transition: none; } }
+
+/* travel-aware places: 판교 같은 밖에 있는 시간과 오가는 길 */
+.k-away { --k-bg: var(--partner-bg); --k-ink: var(--partner-ink); --k-acc: var(--partner-acc); --k-face: #E2F6EE; }
+.wk-away, .wk-move { position: absolute; left: 2px; right: 2px; border-radius: 10px; }
+.wk-away { background: color-mix(in srgb, var(--partner-bg) 80%, transparent); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--partner-acc) 75%, transparent); }
+.wk-move { background: repeating-linear-gradient(-45deg, color-mix(in srgb, var(--commute-bg) 92%, transparent) 0 5px, color-mix(in srgb, var(--commute-acc) 42%, transparent) 5px 10px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--commute-acc) 55%, transparent); }
+.wk-band-lbl { position: absolute; left: 4px; right: 4px; top: 3px; padding: 0 5px; border-radius: 99px; background: var(--card); color: var(--commute-ink); font-family: var(--font-cute); font-size: 11px; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; width: fit-content; max-width: calc(100% - 8px); }
+.wk-blk.is-missed { opacity: 0.5; }
+.wl-route { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+.wl-route .rt-step { padding: 3px 10px; border-radius: 99px; background: var(--k-bg); color: var(--k-ink); font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wl-route .rt-arrow { color: var(--ink-3); font-size: 12px; }
+.conflict { color: var(--due-ink); font-weight: 700; }
 </style>
 
 <main class="page">
@@ -559,6 +571,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
         <ul class="strip-legend" aria-label="막대 색깔 안내">
           <li class="hm"><i></i>집</li>
           <li class="k-school"><i></i>학교에 있는 시간</li>
+          <li class="k-away" id="strip-away" hidden><i></i><span id="strip-away-t">밖에 있는 시간</span></li>
           <li class="ev"><i></i>미팅·수업</li>
           <li class="k-commute"><i></i>오가는 길</li>
         </ul>
@@ -591,6 +604,8 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
     </div>
     <ul class="legend" aria-label="색깔 안내">
       <li class="k-school"><span class="ico" data-icon="pin"></span>학교에 있는 시간</li>
+      <li class="k-away" id="lg-away" hidden><span class="ico" data-icon="pin"></span><span id="lg-away-t">밖에 있는 시간</span></li>
+      <li class="k-commute"><span class="ico" data-icon="bus"></span>오가는 길</li>
       <li class="k-lab"><span class="ico" data-icon="laptop"></span>연구실 미팅</li>
       <li class="k-partner"><span class="ico" data-icon="video"></span>NC AI 미팅</li>
       <li class="k-class"><span class="ico" data-icon="book"></span>수업</li>
@@ -678,7 +693,7 @@ h1 mark { color: inherit; background: linear-gradient(transparent 60%, var(--acc
   <button type="button" class="tb" id="tb-bot" aria-label="성현봇에게 물어보기"><span class="tb-face"><span class="mascot" data-mascot="bot"></span></span><span>성현봇</span><span class="tb-dot" id="tb-dot" hidden></span></button>
 </nav>
 
-<script type="application/json" id="schedule-data">{"updatedAt":"2026-11-26T17:54:00+09:00","rangeStart":"2026-11-23","rangeEnd":"2027-01-24","papers":[{"id":"A","desc":"편향을 줄이는 연구 · 두 번 떨어지고 다시 도전하는 논문"},{"id":"B","desc":"이번에 처음 낸 논문"}],"events":[{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-11-23T13:30:00+09:00","end":"2026-11-23T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-11-24T11:30:00+09:00","end":"2026-11-24T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-24T15:45:00+09:00","end":"2026-11-24T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-25T13:00:00+09:00","end":"2026-11-25T13:45:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"학교","start":"2026-11-25T14:00:00+09:00","end":"2026-11-25T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-26T10:30:00+09:00","end":"2026-11-26T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-11-26T17:00:00+09:00","end":"2026-11-26T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-11-27T09:00:00+09:00","end":"2026-11-27T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-27T13:00:00+09:00","end":"2026-11-27T13:45:00+09:00"},{"title":"삼성 직원 대상 온라인 강연","kind":"partner","place":"","allDay":true,"date":"2026-11-30","endDate":"2026-12-01"},{"title":"연구실 학위논문 심사 참관","kind":"lab","place":"학교","start":"2026-11-30T16:00:00+09:00","end":"2026-11-30T18:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-01T11:30:00+09:00","end":"2026-12-01T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T14:15:00+09:00","end":"2026-12-01T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T15:45:00+09:00","end":"2026-12-01T16:30:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-03T10:30:00+09:00","end":"2026-12-03T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-03T17:00:00+09:00","end":"2026-12-03T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-04T09:00:00+09:00","end":"2026-12-04T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-04T13:00:00+09:00","end":"2026-12-04T13:45:00+09:00"},{"title":"개인 일정","kind":"personal","place":"","start":"2026-12-04T17:00:00+09:00","end":"2026-12-05T11:00:00+09:00"},{"title":"개인 일정","kind":"personal","place":"","start":"2026-12-05T19:00:00+09:00","end":"2026-12-05T21:00:00+09:00"},{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-12-07T13:30:00+09:00","end":"2026-12-07T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-08T11:30:00+09:00","end":"2026-12-08T12:30:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-08T16:00:00+09:00","end":"2026-12-08T18:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-09T13:00:00+09:00","end":"2026-12-09T13:45:00+09:00"},{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-12-09T13:30:00+09:00","end":"2026-12-09T16:15:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-10T10:30:00+09:00","end":"2026-12-10T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-10T17:00:00+09:00","end":"2026-12-10T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-11T09:00:00+09:00","end":"2026-12-11T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-11T13:00:00+09:00","end":"2026-12-11T13:45:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-15T10:00:00+09:00","end":"2026-12-15T12:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-15T11:30:00+09:00","end":"2026-12-15T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-15T15:45:00+09:00","end":"2026-12-15T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-16T11:15:00+09:00","end":"2026-12-16T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-16T13:00:00+09:00","end":"2026-12-16T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-17T10:30:00+09:00","end":"2026-12-17T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-17T17:00:00+09:00","end":"2026-12-17T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-18T09:00:00+09:00","end":"2026-12-18T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-18T13:00:00+09:00","end":"2026-12-18T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-22T11:30:00+09:00","end":"2026-12-22T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-22T15:45:00+09:00","end":"2026-12-22T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-23T13:00:00+09:00","end":"2026-12-23T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-24T10:30:00+09:00","end":"2026-12-24T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-24T17:00:00+09:00","end":"2026-12-24T18:20:00+09:00"},{"title":"크리스마스","kind":"holiday","place":"","allDay":true,"date":"2026-12-25","endDate":"2026-12-26"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-25T09:00:00+09:00","end":"2026-12-25T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-25T13:00:00+09:00","end":"2026-12-25T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-29T11:30:00+09:00","end":"2026-12-29T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-29T15:45:00+09:00","end":"2026-12-29T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-30T11:15:00+09:00","end":"2026-12-30T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-30T13:00:00+09:00","end":"2026-12-30T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-31T10:30:00+09:00","end":"2026-12-31T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-31T17:00:00+09:00","end":"2026-12-31T18:20:00+09:00"},{"title":"새해첫날","kind":"holiday","place":"","allDay":true,"date":"2027-01-01","endDate":"2027-01-02"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-01T09:00:00+09:00","end":"2027-01-01T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-01T13:00:00+09:00","end":"2027-01-01T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-05T11:30:00+09:00","end":"2027-01-05T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-05T15:45:00+09:00","end":"2027-01-05T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-06T13:00:00+09:00","end":"2027-01-06T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-07T10:30:00+09:00","end":"2027-01-07T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-07T17:00:00+09:00","end":"2027-01-07T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-08T09:00:00+09:00","end":"2027-01-08T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-08T13:00:00+09:00","end":"2027-01-08T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-12T11:30:00+09:00","end":"2027-01-12T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-12T15:45:00+09:00","end":"2027-01-12T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-13T11:15:00+09:00","end":"2027-01-13T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-13T13:00:00+09:00","end":"2027-01-13T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-14T10:30:00+09:00","end":"2027-01-14T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-14T17:00:00+09:00","end":"2027-01-14T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-15T09:00:00+09:00","end":"2027-01-15T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-15T13:00:00+09:00","end":"2027-01-15T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-19T11:30:00+09:00","end":"2027-01-19T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-19T15:45:00+09:00","end":"2027-01-19T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-20T13:00:00+09:00","end":"2027-01-20T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-21T10:30:00+09:00","end":"2027-01-21T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-21T17:00:00+09:00","end":"2027-01-21T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-22T09:00:00+09:00","end":"2027-01-22T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-22T13:00:00+09:00","end":"2027-01-22T13:45:00+09:00"}],"deadlines":[{"paper":"A","title":"보충자료 제출 마감","type":"deadline","start":"2026-11-24T20:00:00+09:00","end":"2026-11-24T20:59:00+09:00"},{"paper":"B","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2026-11-24T21:00:00+09:00","end":"2026-11-25T21:00:00+09:00"},{"paper":"A","title":"보충자료 제출 마감 (연장)","type":"deadline","start":"2026-11-28T20:00:00+09:00","end":"2026-11-28T20:59:00+09:00"},{"paper":"","title":"삼성 직원 대상 온라인 강연","type":"event","place":"학교","start":"2026-11-30T00:00:00+09:00","end":"2026-12-01T00:00:00+09:00"},{"paper":"B","title":"심사 답변 마감","type":"deadline","start":"2026-12-01T20:00:00+09:00","end":"2026-12-01T20:59:00+09:00"},{"paper":"","title":"NC AI 방문 미팅","type":"event","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"paper":"","title":"NC AI 데모 리허설","type":"event","place":"판교","start":"2026-12-08T16:00:00+09:00","end":"2026-12-08T18:00:00+09:00"},{"paper":"","title":"NC AI 데모 시연","type":"event","place":"판교","start":"2026-12-15T10:00:00+09:00","end":"2026-12-15T12:00:00+09:00"},{"paper":"B","title":"최종 심사평 공개","type":"milestone","start":"2026-12-17T21:00:00+09:00","end":"2026-12-19T21:00:00+09:00"},{"paper":"B","title":"학회 제출 확정 마감","type":"deadline","start":"2026-12-24T20:00:00+09:00","end":"2026-12-24T20:59:00+09:00"},{"paper":"A","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2027-01-25T21:00:00+09:00","end":"2027-01-26T21:00:00+09:00"},{"paper":"A","title":"심사 답변 마감","type":"deadline","start":"2027-02-02T20:00:00+09:00","end":"2027-02-02T20:59:00+09:00"},{"paper":"B","title":"합격 발표","type":"milestone","start":"2027-02-10T21:00:00+09:00","end":"2027-02-11T21:00:00+09:00"},{"paper":"A","title":"최종 결과 발표","type":"milestone","start":"2027-02-25T21:00:00+09:00","end":"2027-02-26T21:00:00+09:00"},{"paper":"B","title":"최종본 제출 마감 (합격 시)","type":"deadline","start":"2027-03-04T20:00:00+09:00","end":"2027-03-04T20:59:00+09:00"}]}</script>
+<script type="application/json" id="schedule-data">{"updatedAt":"2026-11-26T18:53:00+09:00","rangeStart":"2026-11-23","rangeEnd":"2027-01-24","travel":{"집-학교":60,"집-판교":85,"학교-판교":80},"papers":[{"id":"A","desc":"편향을 줄이는 연구 · 두 번 떨어지고 다시 도전하는 논문"},{"id":"B","desc":"이번에 처음 낸 논문"}],"events":[{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-11-23T13:30:00+09:00","end":"2026-11-23T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-11-24T11:30:00+09:00","end":"2026-11-24T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-24T15:45:00+09:00","end":"2026-11-24T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-25T13:00:00+09:00","end":"2026-11-25T13:45:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"학교","start":"2026-11-25T14:00:00+09:00","end":"2026-11-25T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-26T10:30:00+09:00","end":"2026-11-26T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-11-26T17:00:00+09:00","end":"2026-11-26T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-11-27T09:00:00+09:00","end":"2026-11-27T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-11-27T13:00:00+09:00","end":"2026-11-27T13:45:00+09:00"},{"title":"삼성 직원 대상 온라인 강연","kind":"partner","place":"","allDay":true,"date":"2026-11-30","endDate":"2026-12-01"},{"title":"연구실 학위논문 심사 참관","kind":"lab","place":"학교","start":"2026-11-30T16:00:00+09:00","end":"2026-11-30T18:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-01T11:30:00+09:00","end":"2026-12-01T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T14:15:00+09:00","end":"2026-12-01T15:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-01T15:45:00+09:00","end":"2026-12-01T16:30:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-03T10:30:00+09:00","end":"2026-12-03T11:15:00+09:00"},{"title":"개인 일정","kind":"personal","place":"","start":"2026-12-03T16:00:00+09:00","end":"2026-12-04T11:00:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-03T17:00:00+09:00","end":"2026-12-03T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-04T09:00:00+09:00","end":"2026-12-04T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-04T13:00:00+09:00","end":"2026-12-04T13:45:00+09:00"},{"title":"목사님과 점심 식사","kind":"personal","place":"","start":"2026-12-05T13:00:00+09:00","end":"2026-12-05T14:00:00+09:00"},{"title":"개인 일정","kind":"personal","place":"","start":"2026-12-05T19:00:00+09:00","end":"2026-12-05T21:00:00+09:00"},{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-12-07T13:30:00+09:00","end":"2026-12-07T16:15:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-08T11:30:00+09:00","end":"2026-12-08T12:30:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-08T16:00:00+09:00","end":"2026-12-08T18:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-09T13:00:00+09:00","end":"2026-12-09T13:45:00+09:00"},{"title":"조교 · 딥러닝 수업 발표 평가","kind":"class","place":"학교","start":"2026-12-09T13:30:00+09:00","end":"2026-12-09T16:15:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-10T10:30:00+09:00","end":"2026-12-10T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-10T17:00:00+09:00","end":"2026-12-10T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-11T09:00:00+09:00","end":"2026-12-11T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-11T13:00:00+09:00","end":"2026-12-11T13:45:00+09:00"},{"title":"NC AI 연구 미팅","kind":"partner","place":"판교","start":"2026-12-15T10:00:00+09:00","end":"2026-12-15T12:00:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-15T11:30:00+09:00","end":"2026-12-15T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-15T15:45:00+09:00","end":"2026-12-15T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-16T11:15:00+09:00","end":"2026-12-16T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-16T13:00:00+09:00","end":"2026-12-16T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-17T10:30:00+09:00","end":"2026-12-17T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-17T17:00:00+09:00","end":"2026-12-17T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-18T09:00:00+09:00","end":"2026-12-18T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-18T13:00:00+09:00","end":"2026-12-18T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-22T11:30:00+09:00","end":"2026-12-22T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-22T15:45:00+09:00","end":"2026-12-22T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-23T13:00:00+09:00","end":"2026-12-23T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-24T10:30:00+09:00","end":"2026-12-24T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-24T17:00:00+09:00","end":"2026-12-24T18:20:00+09:00"},{"title":"크리스마스","kind":"holiday","place":"","allDay":true,"date":"2026-12-25","endDate":"2026-12-26"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2026-12-25T09:00:00+09:00","end":"2026-12-25T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-25T13:00:00+09:00","end":"2026-12-25T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2026-12-29T11:30:00+09:00","end":"2026-12-29T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-29T15:45:00+09:00","end":"2026-12-29T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-30T11:15:00+09:00","end":"2026-12-30T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-30T13:00:00+09:00","end":"2026-12-30T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2026-12-31T10:30:00+09:00","end":"2026-12-31T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2026-12-31T17:00:00+09:00","end":"2026-12-31T18:20:00+09:00"},{"title":"새해첫날","kind":"holiday","place":"","allDay":true,"date":"2027-01-01","endDate":"2027-01-02"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-01T09:00:00+09:00","end":"2027-01-01T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-01T13:00:00+09:00","end":"2027-01-01T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-05T11:30:00+09:00","end":"2027-01-05T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-05T15:45:00+09:00","end":"2027-01-05T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-06T13:00:00+09:00","end":"2027-01-06T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-07T10:30:00+09:00","end":"2027-01-07T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-07T17:00:00+09:00","end":"2027-01-07T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-08T09:00:00+09:00","end":"2027-01-08T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-08T13:00:00+09:00","end":"2027-01-08T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-12T11:30:00+09:00","end":"2027-01-12T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-12T15:45:00+09:00","end":"2027-01-12T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-13T11:15:00+09:00","end":"2027-01-13T12:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-13T13:00:00+09:00","end":"2027-01-13T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-14T10:30:00+09:00","end":"2027-01-14T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-14T17:00:00+09:00","end":"2027-01-14T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-15T09:00:00+09:00","end":"2027-01-15T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-15T13:00:00+09:00","end":"2027-01-15T13:45:00+09:00"},{"title":"연구실 정기 세미나","kind":"lab","place":"학교","start":"2027-01-19T11:30:00+09:00","end":"2027-01-19T12:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-19T15:45:00+09:00","end":"2027-01-19T16:30:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-20T13:00:00+09:00","end":"2027-01-20T13:45:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-21T10:30:00+09:00","end":"2027-01-21T11:15:00+09:00"},{"title":"수업 · 대학원 세미나","kind":"class","place":"학교","start":"2027-01-21T17:00:00+09:00","end":"2027-01-21T18:20:00+09:00"},{"title":"수업 · 인공지능특론","kind":"class","place":"집","start":"2027-01-22T09:00:00+09:00","end":"2027-01-22T11:00:00+09:00"},{"title":"연구실 팀미팅","kind":"lab","place":"학교","start":"2027-01-22T13:00:00+09:00","end":"2027-01-22T13:45:00+09:00"}],"deadlines":[{"paper":"A","title":"보충자료 제출 마감","type":"deadline","start":"2026-11-24T20:00:00+09:00","end":"2026-11-24T20:59:00+09:00"},{"paper":"B","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2026-11-24T21:00:00+09:00","end":"2026-11-25T21:00:00+09:00"},{"paper":"A","title":"보충자료 제출 마감 (연장)","type":"deadline","start":"2026-11-28T20:00:00+09:00","end":"2026-11-28T20:59:00+09:00"},{"paper":"","title":"삼성 직원 대상 온라인 강연","type":"event","place":"학교","start":"2026-11-30T00:00:00+09:00","end":"2026-12-01T00:00:00+09:00"},{"paper":"B","title":"심사 답변 마감","type":"deadline","start":"2026-12-01T20:00:00+09:00","end":"2026-12-01T20:59:00+09:00"},{"paper":"","title":"NC AI 방문 미팅","type":"event","place":"판교","start":"2026-12-02T10:30:00+09:00","end":"2026-12-02T12:00:00+09:00"},{"paper":"","title":"NC AI 데모 리허설","type":"event","place":"판교","start":"2026-12-08T16:00:00+09:00","end":"2026-12-08T18:00:00+09:00"},{"paper":"","title":"NC AI 데모 시연","type":"event","place":"판교","start":"2026-12-15T10:00:00+09:00","end":"2026-12-15T12:00:00+09:00"},{"paper":"B","title":"최종 심사평 공개","type":"milestone","start":"2026-12-17T21:00:00+09:00","end":"2026-12-19T21:00:00+09:00"},{"paper":"B","title":"학회 제출 확정 마감","type":"deadline","start":"2026-12-24T20:00:00+09:00","end":"2026-12-24T20:59:00+09:00"},{"paper":"A","title":"심사평 공개 · 답변 시작","type":"milestone","start":"2027-01-25T21:00:00+09:00","end":"2027-01-26T21:00:00+09:00"},{"paper":"A","title":"심사 답변 마감","type":"deadline","start":"2027-02-02T20:00:00+09:00","end":"2027-02-02T20:59:00+09:00"},{"paper":"B","title":"합격 발표","type":"milestone","start":"2027-02-10T21:00:00+09:00","end":"2027-02-11T21:00:00+09:00"},{"paper":"A","title":"최종 결과 발표","type":"milestone","start":"2027-02-25T21:00:00+09:00","end":"2027-02-26T21:00:00+09:00"},{"paper":"B","title":"최종본 제출 마감 (합격 시)","type":"deadline","start":"2027-03-04T20:00:00+09:00","end":"2027-03-04T20:59:00+09:00"}]}</script>
 <script type="application/json" id="page-custom">{}</script>
 <script>
 /*LOGIC-START*/
@@ -743,23 +758,85 @@ function phrase(ev) {
   if (ev.kind === "personal") return { big: "개인 일정 중이에요", sub: ev.title };
   return { big: ev.title + " 중이에요", sub: "" };
 }
-/* A school day: leave home 2 hours before the first event at 학교 (about 1 hour on the way), at school from
-   1 hour before it until the last one ends, then about an hour on the way home. Everything else is home. */
+/* Where 성현 is during a day. Events away from home (place other than 집) are grouped by place in time
+   order. From home, 학교 is reached an hour before its first event (an hour on the way, so he leaves 2 hours
+   before); any other place is reached about 10 minutes before its first event, leaving as long before as
+   public transit takes (DATA.travel: minutes for "집-판교"-style pairs, 60 when unknown). Between places he
+   stays at 학교 until he has to leave; anywhere else he leaves right after the last event there. A place he
+   can't reach before its events end is skipped (those events are "missed"). After the last place he heads
+   home, taking the travel time back. */
+let TRAVEL = {};
+function setTravel(t) { TRAVEL = t && typeof t === "object" && !Array.isArray(t) ? t : {}; }
+function travelMin(a, b) {
+  if (a === b) return 0;
+  const raw = TRAVEL[a + "-" + b] != null ? TRAVEL[a + "-" + b] : TRAVEL[b + "-" + a];
+  const v = Number(raw);
+  return Number.isFinite(v) && v > 0 && v <= 300 ? v : 60;
+}
+function earlyMin(place) { return place === "학교" ? 60 : 10; }
 function dayPlan(events, d0) {
   const d1 = d0 + DAY;
   const list = events.filter(ev => isBusy(ev) && isSchoolEv(ev) && ev.s < d1 && ev.e > d0);
   if (!list.length) return null;
-  const first = Math.min(...list.map(ev => Math.max(ev.s, d0)));
-  const last = Math.max(...list.map(ev => Math.min(ev.e, d1)));
-  return { depart: Math.max(d0, first - 2 * H), arrive: Math.max(d0, first - H), leave: last, home: Math.min(d1, last + H), count: list.length, where: outPlace(list[0]) };
+  const groups = [];
+  list.forEach(ev => {
+    const place = outPlace(ev), s = Math.max(ev.s, d0), e = Math.min(ev.e, d1), g = groups[groups.length - 1];
+    if (g && g.place === place) { g.e = Math.max(g.e, e); g.evs.push(ev); }
+    else groups.push({ place, s, e, evs: [ev] });
+  });
+  const segs = [], stays = [], missed = [];
+  let cur = null;
+  groups.forEach(g => {
+    if (!cur) {
+      const arrive = Math.max(d0, g.s - earlyMin(g.place) * MIN);
+      const depart = Math.max(d0, arrive - travelMin("집", g.place) * MIN);
+      segs.push({ type: "move", from: "집", to: g.place, s: depart, e: arrive });
+      cur = { type: "stay", place: g.place, s: arrive, e: g.e, evs: g.evs.slice() };
+      return;
+    }
+    if (g.place === cur.place) { cur.e = Math.max(cur.e, g.e); cur.evs.push(...g.evs); return; }
+    const tr = travelMin(cur.place, g.place) * MIN;
+    const leave = cur.place === "학교" ? Math.max(cur.e, g.s - tr - earlyMin(g.place) * MIN) : cur.e;
+    const arrive = leave + tr;
+    if (arrive >= g.e) { missed.push(...g.evs); return; }
+    cur.e = leave;
+    stays.push(cur); segs.push(cur);
+    segs.push({ type: "move", from: cur.place, to: g.place, s: leave, e: arrive });
+    missed.push(...g.evs.filter(ev => ev.e <= arrive));
+    cur = { type: "stay", place: g.place, s: arrive, e: g.e, evs: g.evs.filter(ev => ev.e > arrive) };
+  });
+  stays.push(cur); segs.push(cur);
+  const home = Math.min(d1, cur.e + travelMin(cur.place, "집") * MIN);
+  segs.push({ type: "move", from: cur.place, to: "집", s: cur.e, e: home });
+  const places = [];
+  stays.forEach(st => { if (!places.includes(st.place)) places.push(st.place); });
+  return { segs, stays, missed, depart: segs[0].s, arrive: segs[0].e, leave: cur.e, home, count: list.length,
+    where: stays[0].place, lastPlace: cur.place, places, label: places.join("·") };
 }
+function locAt(plan, t) {
+  if (plan) for (const sg of plan.segs) if (sg.s <= t && t < sg.e) return sg;
+  return { type: "home", place: "집" };
+}
+/* can this event be what he is doing while at loc? (an event elsewhere is one he can't be at right then) */
+function fitsLoc(ev, loc) {
+  if (!ev.place && !SCHOOL[ev.kind]) return true;
+  if (loc.type === "stay") return isSchoolEv(ev) && outPlace(ev) === loc.place;
+  if (loc.type === "home") return !isSchoolEv(ev);
+  return false;
+}
+function stayTone(place) { return place === "학교" ? "school" : "away"; }
+function stayWord(place) { return place === "학교" ? "학교에서 연구하는 시간" : place + "에 있는 시간"; }
+function moveWord(sg) { return sg.to === "집" ? "집 가는 길" : sg.to + " 가는 길"; }
+function planText(plan, named) { return plan.stays.map(st => (named || plan.stays.length > 1 ? st.place + " " : "") + fmtRange(st.s, st.e)).join(" → "); }
 function nowState(events, now, rangeEnd) {
   const busy = events.filter(isBusy);
-  const t0 = dayStart(now), t1 = t0 + DAY, hour = parts(now).h;
-  const current = busy.filter(ev => ev.s <= now && now < ev.e).sort((a, b) => b.s - a.s);
-  const nextEv = busy.find(ev => ev.s > now) || null;
-  const next = nextEv ? nextInfo(nextEv, now) : null;
+  const t0 = dayStart(now), hour = parts(now).h;
   const plan = dayPlan(events, t0);
+  const loc = locAt(plan, now);
+  const missed = plan ? plan.missed : [];
+  const current = busy.filter(ev => ev.s <= now && now < ev.e && fitsLoc(ev, loc)).sort((a, b) => b.s - a.s);
+  const nextEv = busy.find(ev => ev.s > now && !missed.includes(ev)) || null;
+  const next = nextEv ? nextInfo(nextEv, now) : null;
   if (current.length) {
     const ev = current[0], ph = phrase(ev);
     const extra = current.length > 1 ? "다른 일정 " + (current.length - 1) + "개도 겹쳐 있어요" : "";
@@ -772,23 +849,22 @@ function nowState(events, now, rangeEnd) {
   if (plan && now < plan.depart) {
     return { mode: "morning", tone: night ? "night" : "morning", mascot: night ? "night" : "morning", big: "아직 집이에요", sub: fmtTime(plan.depart) + "쯤 " + ro(plan.where) + " 출발해요", where: "집", next };
   }
-  if (plan && now < plan.arrive) {
-    return { mode: "toSchool", tone: "commute", mascot: "toSchool", big: plan.where + " 가는 중이에요", sub: fmtTime(plan.arrive) + "쯤 도착해요", where: plan.where + " 가는 길",
-      range: plan.where + " 가는 길 " + fmtRange(plan.depart, plan.arrive), left: fmtDur(plan.arrive - now) + " 뒤 도착", progress: clamp01((now - plan.depart) / (plan.arrive - plan.depart)), next };
+  if (loc.type === "move") {
+    const range = moveWord(loc) + " " + fmtRange(loc.s, loc.e), left = fmtDur(loc.e - now) + " 뒤 도착", progress = clamp01((now - loc.s) / (loc.e - loc.s));
+    if (loc.to === "집") return { mode: "commute", tone: "commute", mascot: "commute", big: "집에 가는 중이에요", sub: loc.from + " 일정이 " + fmtTime(loc.s) + "에 끝났어요", where: "집 가는 길", range, left, progress, next };
+    return { mode: "toSchool", tone: "commute", mascot: "toSchool", big: loc.to + " 가는 중이에요", sub: (loc.from === "집" ? "" : loc.from + "에서 가요 · ") + fmtTime(loc.e) + "쯤 도착해요",
+      where: moveWord(loc), range, left, progress, next };
   }
-  if (plan && now < plan.leave) {
-    const nextSchool = busy.find(ev => isSchoolEv(ev) && ev.s > now && ev.s < t1);
-    return { mode: "school", tone: "school", mascot: "school", big: plan.where === "학교" ? "학교에서 연구하는 중이에요" : plan.where + "에 있어요",
-      sub: nextSchool ? "미팅 없는 시간 · 다음 일정까지 " + fmtDur(nextSchool.s - now) : "미팅 없는 시간",
-      where: plan.where, range: plan.where + " " + fmtRange(plan.arrive, plan.leave), left: fmtDur(plan.leave - now) + " 뒤 집으로",
-      progress: clamp01((now - plan.arrive) / (plan.leave - plan.arrive)), next };
-  }
-  if (plan && now < plan.home) {
-    return { mode: "commute", tone: "commute", mascot: "commute", big: "집에 가는 중이에요", sub: plan.where + " 일정이 " + fmtTime(plan.leave) + "에 끝났어요", where: "집 가는 길",
-      range: "집 가는 길 " + fmtRange(plan.leave, plan.home), left: fmtDur(plan.home - now) + " 뒤 도착", progress: clamp01((now - plan.leave) / (plan.home - plan.leave)), next };
+  if (loc.type === "stay") {
+    const nextHere = busy.find(ev => ev.s > now && ev.s < loc.e && fitsLoc(ev, loc));
+    const after = plan.segs[plan.segs.indexOf(loc) + 1];
+    return { mode: "school", tone: stayTone(loc.place), mascot: "school", big: loc.place === "학교" ? "학교에서 연구하는 중이에요" : loc.place + "에 있어요",
+      sub: nextHere ? "미팅 없는 시간 · 다음 일정까지 " + fmtDur(nextHere.s - now) : "미팅 없는 시간",
+      where: loc.place, range: loc.place + " " + fmtRange(loc.s, loc.e), left: fmtDur(loc.e - now) + " 뒤 " + (after && after.to !== "집" ? ro(after.to) : "집으로"),
+      progress: clamp01((now - loc.s) / (loc.e - loc.s)), next };
   }
   return { mode: "home", tone: night ? "night" : "home", mascot: night ? "night" : "home", big: "집에서 쉬는 중이에요",
-    sub: plan ? "오늘 " + plan.where + " 일정 끝!" : "오늘은 학교 가는 날이 아니에요", where: "집", next };
+    sub: plan ? "오늘 " + plan.label + " 일정 끝!" : "오늘은 학교 가는 날이 아니에요", where: "집", next };
 }
 function dday(key, now) { const diff = Math.round((dayStart(key) - dayStart(now)) / DAY); return diff > 0 ? "D-" + diff : diff === 0 ? "D-DAY" : "D+" + (-diff); }
 function dlLabel(d) { return (d.paper ? "논문 " + d.paper + " · " : "") + d.title + (d.place ? " · " + d.place : ""); }
@@ -832,22 +908,35 @@ function dayModel(events, d0, now, rangeEnd) {
   const d1 = d0 + DAY, today0 = dayStart(now), isToday = d0 === today0, isPastDay = d0 < today0;
   const list = events.filter(ev => isBusy(ev) && ev.s < d1 && ev.e > d0);
   const plan = dayPlan(events, d0);
+  const missed = plan ? plan.missed : [];
   const rows = [];
   const rank = { move: 0, gap: 1, event: 2 };
-  if (plan && plan.depart > d0) rows.push({ type: "move", t: plan.depart, t2: plan.depart, tone: "commute", mascot: "toSchool", title: ro(plan.where) + " 출발", sub: plan.where + "까지 1시간쯤 걸려요" });
-  if (plan && plan.arrive > d0) rows.push({ type: "move", t: plan.arrive, t2: plan.arrive, tone: "school", mascot: "school", title: plan.where + " 도착", sub: "첫 일정 1시간 전쯤" });
-  let prevSchoolEnd = null;
+  if (plan) plan.segs.forEach((sg, i) => {
+    if (sg.type === "stay") {
+      let cur = sg.s;
+      sg.evs.filter(ev => !missed.includes(ev)).sort((a, b) => a.s - b.s).forEach((ev, k) => {
+        if (!(i === 1 && k === 0) && ev.s - cur >= 15 * MIN) rows.push({ type: "gap", t: cur, t2: ev.s, tone: stayTone(sg.place), text: stayWord(sg.place) + " · " + fmtDur(ev.s - cur) });
+        cur = Math.max(cur, ev.e);
+      });
+      if (sg.e - cur >= 15 * MIN) rows.push({ type: "gap", t: cur, t2: sg.e, tone: stayTone(sg.place), text: stayWord(sg.place) + " · " + fmtDur(sg.e - cur) });
+      return;
+    }
+    const dur = fmtDur(sg.e - sg.s), how = (sg.from === "집" && sg.to === "학교") || (sg.to === "집" && sg.from === "학교") ? "" : "대중교통으로 ";
+    if (sg.to === "집") {
+      rows.push({ type: "move", t: sg.s, t2: sg.s, tone: "commute", mascot: "commute", title: "집으로 출발", sub: (sg.from === "학교" ? "" : sg.from + "에서 ") + "집까지 " + how + dur + "쯤 걸려요" });
+      if (sg.e < d1) rows.push({ type: "move", t: sg.e, t2: sg.e, tone: "home", mascot: "home", title: "집 도착 · 쉬는 시간", sub: "그다음엔 집에 있어요" });
+      return;
+    }
+    const first = plan.segs[i + 1].evs.filter(ev => !missed.includes(ev)).sort((a, b) => a.s - b.s)[0];
+    const lead = first ? first.s - sg.e : 0;
+    if (sg.s > d0) rows.push({ type: "move", t: sg.s, t2: sg.s, tone: "commute", mascot: "toSchool", title: ro(sg.to) + " 출발", sub: (sg.from === "집" ? "" : sg.from + "에서 ") + sg.to + "까지 " + how + dur + "쯤 걸려요" });
+    if (sg.e > d0) rows.push({ type: "move", t: sg.e, t2: sg.e, tone: stayTone(sg.to), mascot: "school", title: sg.to + " 도착",
+      sub: lead < 0 ? "일정에 조금 늦게 도착해요" : i === 0 ? "첫 일정 " + fmtDur(lead) + " 전쯤" : lead < 15 * MIN ? "일정 " + fmtDur(lead) + " 전쯤" : sg.from + "에서 바로 와요" });
+  });
   for (const ev of list) {
-    const school = isSchoolEv(ev);
-    if (school && prevSchoolEnd !== null && ev.s - prevSchoolEnd >= 15 * MIN) rows.push({ type: "gap", t: prevSchoolEnd, t2: ev.s, tone: "school", text: (plan && plan.where !== "학교" ? plan.where + "에 있는 시간 · " : "학교에서 연구하는 시간 · ") + fmtDur(ev.s - prevSchoolEnd) });
     const s = Math.max(ev.s, d0), e = Math.min(ev.e, d1), cs = clock(s), ce = clock(e);
-    rows.push({ type: "event", t: ev.s, t2: ev.e, kind: ev.kind, mascot: mascotFor(ev), title: ev.title, place: ev.place || (school ? "학교" : ""), tag: KIND[ev.kind],
-      startAp: cs.ap, startHm: cs.hm, endText: "~ " + (ce.midnight ? "자정" : (ce.ap === cs.ap ? ce.hm : ce.ap + " " + ce.hm)) });
-    if (school) prevSchoolEnd = Math.max(prevSchoolEnd === null ? 0 : prevSchoolEnd, ev.e);
-  }
-  if (plan) {
-    rows.push({ type: "move", t: plan.leave, t2: plan.leave, tone: "commute", mascot: "commute", title: "집으로 출발", sub: "집까지 1시간쯤 걸려요" });
-    if (plan.home < d1) rows.push({ type: "move", t: plan.home, t2: plan.home, tone: "home", mascot: "home", title: "집 도착 · 쉬는 시간", sub: "그다음엔 집에 있어요" });
+    rows.push({ type: "event", t: ev.s, t2: ev.e, kind: ev.kind, mascot: mascotFor(ev), title: ev.title, place: ev.place || (isSchoolEv(ev) ? "학교" : ""), tag: KIND[ev.kind],
+      missed: missed.includes(ev), startAp: cs.ap, startHm: cs.hm, endText: "~ " + (ce.midnight ? "자정" : (ce.ap === cs.ap ? ce.hm : ce.ap + " " + ce.hm)) });
   }
   rows.sort((a, b) => a.t - b.t || rank[a.type] - rank[b.type]);
   rows.forEach(r => {
@@ -856,13 +945,14 @@ function dayModel(events, d0, now, rangeEnd) {
     if (isToday) {
       if (r.type === "event") {
         if (r.t2 <= now) { r.state = "끝났어요"; r.cls = "is-past"; }
+        else if (r.missed) { if (r.t > now) r.state = fmtDur(r.t - now) + " 뒤"; }
         else if (r.t <= now) { r.state = fmtDur(r.t2 - now) + " 남음"; r.cls = "is-now"; r.progress = (now - r.t) / (r.t2 - r.t); }
         else r.state = fmtDur(r.t - now) + " 뒤";
       } else if (r.type === "move" && r.t <= now) r.cls = "is-past";
     } else if (isPastDay) r.cls = "is-past";
   });
   if (isToday && now < rangeEnd && list.length + (plan ? 1 : 0) > 0) {
-    const inEvent = rows.some(r => r.type === "event" && r.t <= now && now < r.t2);
+    const inEvent = rows.some(r => r.type === "event" && !r.missed && r.t <= now && now < r.t2);
     const inGap = rows.find(r => r.type === "gap" && r.t <= now && now < r.t2);
     if (inGap) { inGap.here = true; inGap.text = "지금 여기! " + inGap.text; }
     else if (!inEvent) {
@@ -883,7 +973,8 @@ function stripModel(events, now) {
   list.forEach(ev => take(ev.s, ev.e));
   if (plan) take(plan.depart, plan.home);
   const base = t0 + a * H, span = (b - a) * H, pct = x => (x - base) / span * 100;
-  const bands = plan ? [{ tone: "commute", left: pct(plan.depart), width: pct(plan.arrive) - pct(plan.depart) }, { tone: "school", left: pct(plan.arrive), width: pct(plan.leave) - pct(plan.arrive) }, { tone: "commute", left: pct(plan.leave), width: pct(plan.home) - pct(plan.leave) }] : [];
+  const bands = plan ? plan.segs.filter(sg => sg.e > sg.s).map(sg => ({ tone: sg.type === "move" ? "commute" : stayTone(sg.place), left: pct(sg.s), width: pct(sg.e) - pct(sg.s),
+    title: (sg.type === "move" ? moveWord(sg) : sg.place) + " · " + fmtRange(sg.s, sg.e) })) : [];
   const segs = list.map(ev => ({ kind: ev.kind, title: ev.title, left: pct(Math.max(ev.s, t0)), width: pct(Math.min(ev.e, t1)) - pct(Math.max(ev.s, t0)), past: ev.e <= now }));
   const ticks = [];
   for (let h = Math.ceil(a / 3) * 3; h <= b; h += 3) ticks.push({ h, pct: (h - a) / (b - a) * 100 });
@@ -1086,11 +1177,11 @@ function botReply(events, now, rangeEnd) {
   return { lead: "지금은 " + st.big, rows, text: st.mode === "busy" ? "일정 중이라 답장이 조금 늦을 수 있어요." : "" };
 }
 const BOT_HOWLOC = { lead: "위치는 일정을 보고 짐작한 거예요", rows: [
-  { k: "info", pill: "출발", text: "학교 일정 2시간 전쯤 집에서 나가요" },
-  { k: "info", pill: "학교", text: "첫 일정 1시간 전부터 마지막 일정까지 학교에 있어요" },
-  { k: "info", pill: "귀가", text: "학교 일정이 끝나면 1시간쯤 걸려 집에 가요" },
+  { k: "info", pill: "학교", text: "학교 일정 2시간 전쯤 집에서 나가서, 첫 일정 1시간 전부터 마지막 일정까지 학교에 있어요" },
+  { k: "info", pill: "다른 곳", text: "판교처럼 다른 곳은 대중교통으로 걸리는 시간을 보고 일정 10분 전쯤 도착하게 나가요" },
+  { k: "info", pill: "귀가", text: "마지막 일정이 끝나면 대중교통 시간만큼 걸려 집에 가요" },
   { k: "info", pill: "집", text: "온라인 수업(금요일)은 집에서 들어요" }],
-  note: "GPS가 아니라 캘린더로 계산해서 조금 다를 수 있어요" };
+  note: "GPS가 아니라 캘린더랑 대중교통 시간으로 계산해서 조금 다를 수 있어요" };
 function botFreeDay(events, dls, d0, win, now) {
   const step = 10 * MIN, ws0 = d0 + win.a * H, we = d0 + win.b * H;
   const ws = Math.max(ws0, Math.ceil(now / step) * step);
@@ -1122,8 +1213,8 @@ function botFreeDay(events, dls, d0, win, now) {
   let text;
   if (tone === "no") {
     const cover = blocks.find(b => b.s <= ws && b.e >= we);
-    text = cover ? (cover.school ? plan.where + "에 있는 시간이에요" : cover.title + (/일정$/.test(cover.title) ? "이 있어요" : " 일정이 있어요"))
-      : plan && plan.home > ws ? plan.where + " 일정이 " + fmtTime(plan.leave) + "에 끝나서 빠듯해요" : "일정이 꽉 차 있어요";
+    text = cover ? (cover.school ? (plan.places.length > 1 ? "밖에 나가 있는 시간이에요 (" + plan.label + ")" : plan.label + "에 있는 시간이에요") : cover.title + (/일정$/.test(cover.title) ? "이 있어요" : " 일정이 있어요"))
+      : plan && plan.home > ws ? plan.lastPlace + " 일정이 " + fmtTime(plan.leave) + "에 끝나서 빠듯해요" : "일정이 꽉 차 있어요";
   } else if (full) {
     text = win.word ? win.word + " 내내 비어 있어요" : "하루 종일 비어 있어요";
   } else {
@@ -1131,7 +1222,7 @@ function botFreeDay(events, dls, d0, win, now) {
     const list = shown.length ? shown : [frees.reduce((m, f) => (f.e - f.s > m.e - m.s ? f : m), frees[0])];
     text = list.map(f => (f.e === we ? fmtTime(f.s) + " 이후" : f.s === ws ? fmtTime(f.e) + " 전까지" : fmtRange(f.s, f.e))).join(", ") + " 괜찮아요";
     const f0 = list[0];
-    if (plan && f0.s === plan.home) text += " (학교 갔다 와서)";
+    if (plan && f0.s === plan.home) text += " (" + plan.label + " 갔다 와서)";
     else { const b = blocks.find(x => !x.school && x.e === f0.s); if (b) text += " (" + b.title + " 끝나고)"; }
   }
   if (dl) text += " · " + (dl.paper ? "논문 " + dl.paper + " " : "") + "마감(" + fmtTime(dl.e) + ")이 있는 날이라 바쁠 수 있어요";
@@ -1182,12 +1273,12 @@ function botAt(events, T, now, rangeEnd) {
 function botEnd(events, d0, now) {
   const plan = dayPlan(events, d0), name = botDayName(d0, now), evs = botDayEvents(events, d0);
   if (plan) {
-    const school = evs.filter(isSchoolEv);
-    const last = school.reduce((m, ev) => (ev.e > m.e ? ev : m), school[0]);
-    const rows = [{ k: "home", pill: "집 도착", text: fmtTime(plan.home) + "쯤" + (plan.home <= now ? " (도착했어요)" : "") },
+    const outs = evs.filter(ev => isSchoolEv(ev) && !plan.missed.includes(ev));
+    const last = outs.reduce((m, ev) => (ev.e > m.e ? ev : m), outs[0]);
+    const rows = [{ k: "home", pill: "집 도착", text: fmtTime(plan.home) + "쯤" + (plan.home <= now ? " (도착했어요)" : "") + (plan.lastPlace === "학교" ? "" : " · " + plan.lastPlace + "에서 대중교통으로 " + fmtDur(plan.home - plan.leave)) },
       { k: last.kind, pill: "마지막", text: last.title + " · " + fmtRange(last.s, last.e) }];
     evs.filter(ev => !isSchoolEv(ev) && ev.s >= plan.leave).forEach(ev => rows.push({ k: ev.kind, pill: "그 뒤", text: fmtRange(ev.s, ev.e) + " " + ev.title }));
-    return { lead: name + " " + plan.where + " 일정은 " + fmtTime(plan.leave) + "에 " + (plan.leave <= now ? "끝났어요" : "끝나요"), rows };
+    return { lead: name + " " + plan.lastPlace + " 일정은 " + fmtTime(plan.leave) + "에 " + (plan.leave <= now ? "끝났어요" : "끝나요"), rows };
   }
   if (evs.length) {
     const end = Math.max(...evs.map(ev => ev.e));
@@ -1202,9 +1293,10 @@ function botStart(events, d0, now, explicit, rangeEnd) {
   }
   const plan = dayPlan(events, d0), name = botDayName(d0, now);
   if (!plan) return { lead: name + " 학교 안 가는 날이에요", rows: [{ k: "home", pill: "집", text: "집에 있어요" }] };
-  const first = botDayEvents(events, d0).filter(isSchoolEv)[0];
+  const first = plan.stays[0].evs.slice().sort((a, b) => a.s - b.s)[0];
   return { lead: name + " " + fmtTime(plan.depart) + "쯤 집에서 나가요",
-    rows: [{ k: "commute", pill: plan.where + " 도착", text: fmtTime(plan.arrive) + "쯤" }, { k: first.kind, pill: "첫 일정", text: fmtTime(first.s) + " " + first.title }] };
+    rows: [{ k: "commute", pill: plan.where + " 도착", text: fmtTime(plan.arrive) + "쯤 · " + (plan.where === "학교" ? "" : "대중교통으로 ") + fmtDur(plan.arrive - plan.depart) + " 걸려요" },
+      { k: first.kind, pill: "첫 일정", text: fmtTime(first.s) + " " + first.title + (plan.where === "학교" ? "" : " · " + plan.where) }] };
 }
 function botSchool(events, sc, now, rangeEnd) {
   const t0 = dayStart(now);
@@ -1212,17 +1304,18 @@ function botSchool(events, sc, now, rangeEnd) {
   if (!days.length) { for (let d = t0; d < rangeEnd; d += DAY) days.push(d); label = "앞으로"; }
   const row = d0 => {
     const p = dayPlan(events, d0), evs = botDayEvents(events, d0);
-    return p ? { k: "school", pill: p.where, label: botShort(d0), text: fmtRange(p.arrive, p.leave) }
-      : { k: "home", pill: "집", label: botShort(d0), text: evs.length ? "집에서 " + evs.map(ev => ev.title).join(" · ") : "쉬는 날" };
+    return p ? { go: true, k: stayTone(p.where), pill: p.label, label: botShort(d0), text: planText(p) }
+      : { go: false, k: "home", pill: "집", label: botShort(d0), text: evs.length ? "집에서 " + evs.map(ev => ev.title).join(" · ") : "쉬는 날" };
   };
   if (days.length === 1) {
     const r = row(days[0]);
     delete r.label;
-    return { lead: botDayName(days[0], now) + (r.k === "school" ? " " + r.pill + " 가요!" : " 학교 안 가요"), rows: [r] };
+    return { lead: botDayName(days[0], now) + (r.go ? " " + r.pill + " 가요!" : " 학교 안 가요"), rows: [r] };
   }
   const go = days.filter(d => dayPlan(events, d));
+  const tag = d => { const o = dayPlan(events, d).places.filter(x => x !== "학교"); return WD[parts(d).wd] + (o.length ? "(" + o.join("·") + ")" : ""); };
   return { lead: (label ? label + " " : "") + "학교 가는 날이에요", rows: days.map(row),
-    foot: days.length <= 7 ? (go.length ? "학교 가는 날: " + go.map(d => WD[parts(d).wd]).join("·") : "학교 가는 날이 없어요") : "" };
+    foot: days.length <= 7 ? (go.length ? "나가는 날: " + go.map(tag).join("·") : "학교 가는 날이 없어요") : "" };
 }
 function botBusyWord(events, d0) {
   const p = dayPlan(events, d0);
@@ -1233,15 +1326,15 @@ function botSummary(events, dls, sc, now, busyAsk) {
   const days = sc.inRange.length ? sc.inRange : [dayStart(now)];
   if (days.length === 1) {
     const d0 = days[0], d1 = d0 + DAY, plan = dayPlan(events, d0), evs = botDayEvents(events, d0);
-    const rows = [plan ? { k: "school", pill: plan.where, text: fmtRange(plan.arrive, plan.leave) + " · 그 밖엔 집" }
+    const rows = [plan ? { k: stayTone(plan.where), pill: plan.label, text: fmtTime(plan.depart) + " 출발 · " + planText(plan) + " · 그 밖엔 집" }
       : { k: "home", pill: "집", text: evs.length ? "학교 안 가는 날이에요" : "일정 없이 집에서 쉬어요" }];
-    evs.forEach(ev => rows.push({ k: ev.kind, pill: KIND[ev.kind], text: fmtRange(Math.max(ev.s, d0), Math.min(ev.e, d1)) + " " + ev.title + (ev.place === "집" ? " (집에서)" : "") }));
+    evs.forEach(ev => rows.push({ k: ev.kind, pill: KIND[ev.kind], text: fmtRange(Math.max(ev.s, d0), Math.min(ev.e, d1)) + " " + ev.title + (ev.place === "집" ? " (집에서)" : ev.place && ev.place !== "학교" ? " (" + ev.place + ")" : "") }));
     dlOnDay(dls, d0).forEach(d => rows.push({ k: dlKind(d), pill: d.type === "deadline" ? "마감" : d.type === "event" ? "중요" : "논문", text: dlChipText(d, d0) }));
     return { lead: botDayName(d0, now) + " 일정이에요", rows, foot: busyAsk ? botBusyWord(events, d0) : "" };
   }
   return { lead: (sc.label ? sc.label + " " : "") + "일정이에요", rows: days.map(d0 => {
     const plan = dayPlan(events, d0), evs = botDayEvents(events, d0), due = dlOnDay(dls, d0).some(d => d.type === "deadline");
-    return { k: plan ? "school" : "home", pill: plan ? plan.where : "집", label: botShort(d0),
+    return { k: plan ? stayTone(plan.where) : "home", pill: plan ? plan.label : "집", label: botShort(d0),
       text: (evs.length ? evs.map(ev => ev.title).join(" · ") : "일정 없어요") + (due ? " · 논문 마감!" : "") + (busyAsk ? " — " + botBusyWord(events, d0) : "") };
   }) };
 }
@@ -1313,6 +1406,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     pin: '<path class="f" d="M12 21.3s-6.4-5.5-6.4-11a6.4 6.4 0 0 1 12.8 0c0 5.5-6.4 11-6.4 11z"/><circle cx="12" cy="10.3" r="2.3"/>',
     sparkle: '<path class="f" d="M12 3.6l1.7 5 5 1.7-5 1.7-1.7 5-1.7-5-5-1.7 5-1.7z"/><path d="M19 15.5l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6z"/>',
     calendar: '<rect class="f" x="4" y="5.5" width="16" height="14" rx="2.4"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
+    bus: '<rect class="f" x="5" y="4.5" width="14" height="12.5" rx="3"/><path d="M5 11h14M8.5 17v2.6M15.5 17v2.6"/><circle cx="8.6" cy="14" r=".9"/><circle cx="15.4" cy="14" r=".9"/>',
     bell: '<path class="f" d="M12 3.6a5.5 5.5 0 0 0-5.5 5.5v3.2l-1.8 3.3h14.6l-1.8-3.3V9.1A5.5 5.5 0 0 0 12 3.6z"/><path d="M9.6 18.6a2.5 2.5 0 0 0 4.8 0"/>'
   };
 
@@ -1416,6 +1510,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
   let EVENTS = normalize(DATA.events);
   let DLS = normalizeDeadlines(DATA.deadlines);
   let PAPERS = (Array.isArray(DATA.papers) ? DATA.papers : []).map(p => ({ id: String(p.id || ""), desc: String(p.desc || "") })).filter(p => p.id);
+  setTravel(DATA.travel);
   let rangeStart = Number.isFinite(parseDay(DATA.rangeStart)) ? parseDay(DATA.rangeStart) : weekStart(Date.now());
   let rangeEnd = Number.isFinite(parseDay(DATA.rangeEnd)) ? parseDay(DATA.rangeEnd) + DAY : rangeStart + 14 * DAY;
   const $ = id => document.getElementById(id);
@@ -1468,9 +1563,12 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
       nx.replaceChildren(...kids);
     }
     const m = stripModel(EVENTS, now);
-    $("strip-sum").textContent = m.plan ? m.plan.where + " " + fmtRange(m.plan.arrive, m.plan.leave) + " · 그 밖엔 집" : "오늘은 집에 있는 날이에요";
+    $("strip-sum").textContent = m.plan ? planText(m.plan, true) + " · 그 밖엔 집" : "오늘은 집에 있는 날이에요";
+    const awayToday = m.plan ? m.plan.places.filter(p => p !== "학교") : [];
+    $("strip-away").hidden = !awayToday.length;
+    $("strip-away-t").textContent = awayToday.join("·") + "에 있는 시간";
     const parts2 = [];
-    m.bands.forEach(bd => { const d = el("span", "strip-band k-" + bd.tone); d.style.left = bd.left + "%"; d.style.width = bd.width + "%"; parts2.push(d); });
+    m.bands.forEach(bd => { const d = el("span", "strip-band k-" + bd.tone); d.style.left = bd.left + "%"; d.style.width = bd.width + "%"; d.title = bd.title; parts2.push(d); });
     m.segs.forEach(sg => { const d = el("span", "strip-seg k-" + sg.kind + (sg.past ? " is-past" : "")); d.style.left = sg.left + "%"; d.style.width = sg.width + "%"; d.title = sg.title; parts2.push(d); });
     if (m.nowPct >= 0 && m.nowPct <= 100) { const n = el("span", "strip-now" + (m.nowPct < 10 ? " edge-l" : m.nowPct > 90 ? " edge-r" : "")); n.style.left = m.nowPct + "%"; n.append(el("span", "", "지금")); parts2.push(n); }
     $("strip-bar").replaceChildren(...parts2);
@@ -1513,6 +1611,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
         if (r.place) meta.append(placeEl(r.place));
         meta.append(el("span", "", r.tag));
         if (r.state) meta.append(el("span", "", r.state));
+        if (r.missed) meta.append(el("span", "conflict", "다른 일정이랑 겹쳐요"));
       }
       body.append(meta);
       memo.append(mini, body);
@@ -1539,10 +1638,14 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
       const busy = EVENTS.filter(ev => isBusy(ev) && ev.s < d1 && ev.e > d0);
       const plan = dayPlan(EVENTS, d0);
       busy.forEach(ev => take(ev.s, ev.e, d0, d1));
-      if (plan) take(plan.arrive, plan.leave, d0, d1);
+      if (plan) take(plan.depart, plan.home, d0, d1);
       days.push({ d0, d1, busy, plan, dls: dlOnDay(DLS, d0), wd: parts(d0).wd });
     }
     if (minH > maxH) { minH = 9; maxH = 18; }
+    const awayWeek = [];
+    days.forEach(d => { if (d.plan) d.plan.places.forEach(p => { if (p !== "학교" && !awayWeek.includes(p)) awayWeek.push(p); }); });
+    $("lg-away").hidden = !awayWeek.length;
+    $("lg-away-t").textContent = awayWeek.join("·") + "에 있는 시간";
     minH = Math.min(minH, 9); maxH = Math.max(maxH, 18);
     if (now >= w0 && now < w1) { const nh = (now - today0) / H; if (nh >= 7 && nh < 24) { minH = Math.min(minH, Math.floor(nh)); maxH = Math.max(maxH, Math.ceil(nh + 0.01)); } }
     minH = Math.max(0, minH); maxH = Math.min(24, maxH);
@@ -1565,16 +1668,25 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     days.forEach(d => {
       const col = el("div", "wk-col" + (d.d0 === today0 ? " is-today" : ""));
       col.style.height = bodyH + "px";
-      if (d.plan) { const band = el("div", "wk-school"); band.style.top = yOf(d.plan.arrive, d.d0) + "px"; band.style.height = Math.max(8, yOf(d.plan.leave, d.d0) - yOf(d.plan.arrive, d.d0)) + "px"; band.title = d.plan.where + "에 있는 시간 · " + fmtRange(d.plan.arrive, d.plan.leave); col.append(band); }
+      if (d.plan) d.plan.segs.forEach(sg => {
+        if (!(sg.e > sg.s)) return;
+        const top = yOf(sg.s, d.d0), h = Math.max(6, yOf(sg.e, d.d0) - top);
+        const band = el("div", sg.type === "move" ? "wk-move" : sg.place === "학교" ? "wk-school" : "wk-away");
+        band.style.top = top + "px"; band.style.height = h + "px";
+        band.title = (sg.type === "move" ? moveWord(sg) : stayWord(sg.place)) + " · " + fmtRange(sg.s, sg.e);
+        if (sg.type === "move" && h >= 18) band.append(el("span", "wk-band-lbl", sg.to === "집" ? "집으로" : sg.to + " 가는 길"));
+        col.append(band);
+      });
       lanes(d.busy).forEach(({ ev, lane, lanes: n }) => {
         const s = Math.max(ev.s, d.d0), e = Math.min(ev.e, d.d1);
         const top = yOf(s, d.d0), height = Math.max(24, (e - s) / H * pxh - 3);
-        const b = el("div", "wk-blk k-" + ev.kind + (ev.e <= now ? " is-past" : (ev.s <= now && now < ev.e ? " is-now" : "")));
+        const miss = !!(d.plan && d.plan.missed.includes(ev)), plc = ev.place && ev.place !== "학교" && ev.place !== "집" ? ev.place : "";
+        const b = el("div", "wk-blk k-" + ev.kind + (miss ? " is-missed" : "") + (ev.e <= now ? " is-past" : (ev.s <= now && now < ev.e && !miss ? " is-now" : "")));
         b.style.top = (top + 1) + "px"; b.style.height = height + "px";
         b.style.left = "calc(" + (lane * 100 / n) + "% + 4px)"; b.style.width = "calc(" + (100 / n) + "% - 8px)";
-        b.title = ev.title + " · " + fmtRange(ev.s, ev.e);
-        b.append(el("b", "", ev.title));
-        if (height >= 44) b.append(el("small", "", fmtRange(s, e)));
+        b.title = ev.title + " · " + fmtRange(ev.s, ev.e) + (plc ? " · " + plc : "") + (miss ? " · 다른 일정이랑 겹쳐요" : "");
+        b.append(el("b", "", ev.title + (plc && height < 44 ? " · " + plc : "")));
+        if (height >= 44) b.append(el("small", "", fmtRange(s, e) + (plc ? " · " + plc : "")));
         col.append(b);
       });
       if (d.d0 === today0) { const y = yOf(now, d.d0); if (y >= 0 && y <= bodyH) { const ln = el("div", "wk-nowline"); ln.style.top = y + "px"; col.append(ln); } }
@@ -1588,13 +1700,22 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
       head.append(mascot(d.plan ? "school" : "home"), el("span", "", p.mo + "월 " + p.d + "일"), el("span", "wd" + wdCls(d.wd), WD[d.wd] + "요일"));
       if (d.d0 === today0) head.append(el("span", "badge", "오늘"));
       card.append(head);
-      card.append(el("span", "wl-plan " + (d.plan ? "k-school" : "k-home"), d.plan ? d.plan.where + " " + fmtRange(d.plan.arrive, d.plan.leave) + " · 그 밖엔 집" : (d.busy.length ? "학교 안 가는 날 · 집에 있어요" : "학교 안 가는 날 · 집에서 쉬어요")));
+      if (d.plan) {
+        const rt = el("div", "wl-route");
+        const step = (tone, text) => rt.append(el("span", "rt-step k-" + tone, text));
+        step("commute", fmtTime(d.plan.depart) + " 출발");
+        d.plan.stays.forEach(st => { rt.append(el("span", "rt-arrow", "→")); step(stayTone(st.place), st.place + " " + fmtRange(st.s, st.e)); });
+        rt.append(el("span", "rt-arrow", "→"));
+        step("home", fmtTime(d.plan.home) + " 집");
+        card.append(rt);
+      } else card.append(el("span", "wl-plan k-home", d.busy.length ? "학교 안 가는 날 · 집에 있어요" : "학교 안 가는 날 · 집에서 쉬어요"));
       if (d.dls.length) { const c = el("div", "chips"); d.dls.forEach(x => { const ch = el("span", "chip k-" + dlKind(x)); ch.append(icon(dlIconName(x)), el("span", "", dlChipText(x, d.d0))); c.append(ch); }); card.append(c); }
       if (d.busy.length) {
         const ul = el("ul", "wl-items");
         d.busy.forEach(ev => {
           const li = el("li", "k-" + ev.kind);
           const n = el("span", "n"); n.append(el("b", "", ev.title)); if (ev.place && ev.place !== "학교") n.append(placeEl(ev.place));
+          if (d.plan && d.plan.missed.includes(ev)) n.append(el("span", "conflict", "겹쳐요"));
           li.append(el("span", "t", fmtRange(Math.max(ev.s, d.d0), Math.min(ev.e, d.d1))), n);
           ul.append(li);
         });
@@ -1799,6 +1920,7 @@ function botAnswer(q, events, dls, now, rangeStart, rangeEnd) {
     DATA = d;
     EVENTS = normalize(d.events);
     DLS = normalizeDeadlines(d.deadlines);
+    setTravel(d.travel);
     PAPERS = (Array.isArray(d.papers) ? d.papers : []).map(p => ({ id: String(p.id || ""), desc: String(p.desc || "") })).filter(p => p.id);
     rangeStart = Number.isFinite(parseDay(d.rangeStart)) ? parseDay(d.rangeStart) : weekStart(Date.now());
     rangeEnd = Number.isFinite(parseDay(d.rangeEnd)) ? parseDay(d.rangeEnd) + DAY : rangeStart + 14 * DAY;
